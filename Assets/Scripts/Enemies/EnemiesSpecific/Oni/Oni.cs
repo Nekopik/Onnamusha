@@ -8,6 +8,8 @@ public class Oni : Entity
     public Oni_ChargeState chargeState { get; private set; }
     public Oni_LookForPlayerState lookForPlayerState { get; private set; }
     public Oni_MeleeAttackState meleeAttackState { get; private set; }
+    public Oni_StunState stunState { get; private set; }
+    public Oni_DeadState deadState { get; private set; }
 
     [SerializeField] private D_IdleState idleStateData;
     [SerializeField] private D_MoveState moveStateData;
@@ -15,6 +17,8 @@ public class Oni : Entity
     [SerializeField] private D_ChargeState chargeStateData;
     [SerializeField] private D_LookForPlayerState lookForPlayerStateData;
     [SerializeField] private D_MeleeAttackState meleeAttackStateData;
+    [SerializeField] private D_StunState stunStateData;
+    [SerializeField] private D_DeadState deadStateData;
 
     [SerializeField] private Transform meleeAttackPosition;
 
@@ -28,8 +32,24 @@ public class Oni : Entity
         chargeState = new Oni_ChargeState(this, stateMachine, "Charge", chargeStateData, this);
         lookForPlayerState = new Oni_LookForPlayerState(this, stateMachine, "LookForPlayer", lookForPlayerStateData, this);
         meleeAttackState = new Oni_MeleeAttackState(this, stateMachine, "MeleeAttack", meleeAttackPosition, meleeAttackStateData, this);
+        stunState = new Oni_StunState(this, stateMachine, "Stun", stunStateData, this);
+        deadState = new Oni_DeadState(this, stateMachine, "Dead", deadStateData, this);
 
         stateMachine.Initialize(moveState);
+    }
+
+    public override void Damage(AttackDetails attackDetails)
+    {
+        base.Damage(attackDetails);
+
+        if (isDead)
+        {
+            stateMachine.ChangeState(deadState);
+        }
+        else if (isStuned && stateMachine.currentState != stunState)
+        {
+            stateMachine.ChangeState(stunState);
+        } 
     }
 
     public override void OnDrawGizmos()
