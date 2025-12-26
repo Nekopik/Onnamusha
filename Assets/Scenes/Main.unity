@@ -685,6 +685,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &629693617
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 629693618}
+  m_Layer: 0
+  m_Name: ProjectileSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &629693618
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 629693617}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.379, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 824865200}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &777610028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1143,7 +1174,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.6, y: 0.65}
+    oldSize: {x: 0.81, y: 0.77}
     newSize: {x: 0.8, y: 0.77}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -90600,6 +90631,7 @@ MonoBehaviour:
   lookForPlayerStateData: {fileID: 11400000, guid: bcc46a7485dbd094c85e85a3ac047c53, type: 2}
   meleeAttackStateData: {fileID: 11400000, guid: 3c430c9938d1cd64db7d9ab446209f2b, type: 2}
   stunStateData: {fileID: 11400000, guid: 673ee43cd9317d64aa3232482965c6b1, type: 2}
+  deadStateData: {fileID: 0}
   meleeAttackPosition: {fileID: 130886486}
 --- !u!1001 &2070423179090940054
 PrefabInstance:
@@ -90726,9 +90758,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5809977011902084616, guid: c48fb950b6709734594baac8cb7960d4, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 2787676205010707945, guid: 27b255c360960334e8325a8792c659c3, type: 3}
+    - target: {fileID: 5809977011902084616, guid: c48fb950b6709734594baac8cb7960d4, type: 3}
+      propertyPath: projectileSpawnPoint
+      value: 
+      objectReference: {fileID: 629693618}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5752338273852600964, guid: c48fb950b6709734594baac8cb7960d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 629693618}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c48fb950b6709734594baac8cb7960d4, type: 3}
 --- !u!1660057539 &9223372036854775807
