@@ -1143,7 +1143,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.6, y: 0.65}
+    oldSize: {x: 0.81, y: 0.77}
     newSize: {x: 0.8, y: 0.77}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -90600,6 +90600,7 @@ MonoBehaviour:
   lookForPlayerStateData: {fileID: 11400000, guid: bcc46a7485dbd094c85e85a3ac047c53, type: 2}
   meleeAttackStateData: {fileID: 11400000, guid: 3c430c9938d1cd64db7d9ab446209f2b, type: 2}
   stunStateData: {fileID: 11400000, guid: 673ee43cd9317d64aa3232482965c6b1, type: 2}
+  deadStateData: {fileID: 11400000, guid: 94721dbb964e37346bd9565cdafa4cdb, type: 2}
   meleeAttackPosition: {fileID: 130886486}
 --- !u!1001 &2070423179090940054
 PrefabInstance:
