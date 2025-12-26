@@ -12,11 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6edcb3978afd2b4bbd1e57ee970df3f, type: 3}
   m_Name: Oni_BaseData
   m_EditorClassIdentifier: 
+  maxHealth: 30
+  damageHopSpeed: 2
   wallCheckDistance: 0.2
-  ledgeCheckDistance: 0.5
+  ledgeCheckDistance: 2
   minAggroDistance: 1
   maxAggroDistance: 3
+  stunResistance: 3
+  stunRecoveryTime: 2
   closeRangeActionDistance: 0.5
+  groundCheckRadius: 0.3
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 512
