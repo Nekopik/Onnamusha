@@ -118,11 +118,11 @@ public class PlayerCombatController : MonoBehaviour
             stunDamageAmount = stunDamageAmount
         };
 
-        int direction = transform.localScale.x > 0 ? 1 : -1;
+        int facingDirection = PC.facingDirection;
 
         projectile
             .GetComponent<Projectile>()
-            .Setup(projectileDetails, direction);
+            .Setup(projectileDetails, facingDirection);
     }
 
 

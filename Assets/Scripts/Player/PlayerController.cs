@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     private bool isDashing;
     private bool knockback;
     private int leftJumps;
-    private int facingDirection = 1;
+    public int facingDirection = 1;
 
     public Transform groundCheck;
     public Transform wallCheck;
