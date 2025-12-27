@@ -15,9 +15,9 @@ MonoBehaviour:
   maxHealth: 30
   damageHopSpeed: 2
   wallCheckDistance: 0.2
-  ledgeCheckDistance: 2
-  minAggroDistance: 1
-  maxAggroDistance: 3
+  ledgeCheckDistance: 0.5
+  minAggroDistance: 2
+  maxAggroDistance: 3.3
   stunResistance: 3
   stunRecoveryTime: 2
   closeRangeActionDistance: 0.5

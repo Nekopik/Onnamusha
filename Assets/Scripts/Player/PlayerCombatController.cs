@@ -5,12 +5,17 @@ public class PlayerCombatController : MonoBehaviour
     [SerializeField] private bool combatEnabled;
     [SerializeField] private float inputTimer, attack1Radius, attack1Damage;
     [SerializeField] private Transform attack1HitBoxPos;
+    [SerializeField] private Transform projectileSpawnPoint;
+    [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private LayerMask whatIsDamagable;
-    [SerializeField] float stunDamageAmount = 1f;
+    [SerializeField] private float stunDamageAmount = 1f;
+    [SerializeField] private float projectileDamage = 10f;
+    [SerializeField] private float projectileCooldown = 2f;
 
     private bool gotInput, isAttacking, isFirstAttack;
 
     private float lastInputTime = Mathf.NegativeInfinity;
+    private float lastProjectileTime = Mathf.NegativeInfinity;
 
     private AttackDetails attackDetails;
 
@@ -42,6 +47,15 @@ public class PlayerCombatController : MonoBehaviour
             {
                 gotInput = true;
                 lastInputTime = Time.time;
+            }
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (combatEnabled && !isAttacking && Time.time >= lastProjectileTime + projectileCooldown)
+            {
+                FireProjectile();
+                lastProjectileTime = Time.time;
             }
         }
     }
@@ -88,6 +102,29 @@ public class PlayerCombatController : MonoBehaviour
         anim.SetBool("isAttacking", isAttacking);
         anim.SetBool("attack1", false);
     }
+
+    private void FireProjectile()
+    {
+        GameObject projectile = Instantiate(
+            projectilePrefab,
+            projectileSpawnPoint.position,
+            Quaternion.identity
+        );
+
+        AttackDetails projectileDetails = new AttackDetails
+        {
+            damageAmount = projectileDamage,
+            position = transform.position,
+            stunDamageAmount = stunDamageAmount
+        };
+
+        int direction = transform.localScale.x > 0 ? 1 : -1;
+
+        projectile
+            .GetComponent<Projectile>()
+            .Setup(projectileDetails, direction);
+    }
+
 
     private void Damage(AttackDetails attackDetails)
     {
