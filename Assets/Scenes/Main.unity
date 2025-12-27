@@ -826,7 +826,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 0344aaa895191ec42b75056a6849d81a, type: 3}
   m_Resource: {fileID: 8300000, guid: 0344aaa895191ec42b75056a6849d81a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.33
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -90631,7 +90631,7 @@ MonoBehaviour:
   lookForPlayerStateData: {fileID: 11400000, guid: bcc46a7485dbd094c85e85a3ac047c53, type: 2}
   meleeAttackStateData: {fileID: 11400000, guid: 3c430c9938d1cd64db7d9ab446209f2b, type: 2}
   stunStateData: {fileID: 11400000, guid: 673ee43cd9317d64aa3232482965c6b1, type: 2}
-  deadStateData: {fileID: 0}
+  deadStateData: {fileID: 11400000, guid: 94721dbb964e37346bd9565cdafa4cdb, type: 2}
   meleeAttackPosition: {fileID: 130886486}
 --- !u!1001 &2070423179090940054
 PrefabInstance:

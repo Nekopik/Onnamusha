@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float speed = 10f;
+    public float speed = 5f;
     public float lifeTime = 3f;
 
     private AttackDetails attackDetails;
