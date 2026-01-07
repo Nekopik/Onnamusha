@@ -667,6 +667,11 @@ MonoBehaviour:
   ledgeCheck: {fileID: 1826552358}
   playerCheck: {fileID: 1516034869}
   groundCheck: {fileID: 41437226}
+  playerDetectedData: {fileID: 11400000, guid: 9c5e7150e85b8854cb105b45c612e914, type: 2}
+  deadStateData: {fileID: 11400000, guid: abbdc3e6b295e274d83aa70397a13d31, type: 2}
+  meleeAttackStateData: {fileID: 11400000, guid: 794199a54b228f94d8d275035d8c5e47, type: 2}
+  meleeAttackPosition: {fileID: 667037397}
+  rangeAttackPosition: {fileID: 1421973422}
 --- !u!212 &617537846
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -878,7 +883,7 @@ Transform:
   m_GameObject: {fileID: 667037396}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.218, y: -0.372, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4618,7 +4623,7 @@ Transform:
   m_GameObject: {fileID: 1421973421}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.919, y: -0.186, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
