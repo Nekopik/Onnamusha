@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: D_BossRangeAttackData
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 5540028114781532103, guid: 54c5e8d842ca77140aa511811e0ee938, type: 3}
-  projectileSpeed: 10
+  projectileSpeed: 5
   attackDamage: 10
+  playerDetectedRange: 20
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 512

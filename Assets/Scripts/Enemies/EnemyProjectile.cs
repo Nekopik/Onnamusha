@@ -11,6 +11,7 @@ public class EnemyProjectile : MonoBehaviour
         this.direction = direction.normalized;
         this.speed = speed;
         this.attackDetails = attackDetails;
+
     }
 
     private void Update()
@@ -23,6 +24,11 @@ public class EnemyProjectile : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             collision.SendMessage("Damage", attackDetails);
+            Destroy(gameObject);
+        }
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
             Destroy(gameObject);
         }
     }

@@ -17,6 +17,7 @@ public class MeleeAttackState : AttackState
     public override void Enter()
     {
         base.Enter();
+        entity.SetVelocity(0f);
         attackDetails.damageAmount = stateData.attackDamage;
         attackDetails.position = entity.aliveGameObject.transform.position;
     }

@@ -15,6 +15,7 @@ public class Boss_IdleState : IdleState
 
     public override void Enter()
     {
+        Debug.Log("Boss Idle State");
         base.Enter();
     }
 

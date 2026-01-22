@@ -8,15 +8,44 @@ public class Boss_MeleeAttackState : MeleeAttackState
         this.boss = boss;
     }
 
+    public override void DoChecks()
+    {
+        base.DoChecks();
+    }
+
+    public override void Enter()
+    {
+        Debug.Log("Boss Melee Atack State");
+        base.Enter();
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+    }
+
     public override void FinishAttack()
     {
         base.FinishAttack();
         boss.SetMeleeAttackOnCooldown();
     }
 
+    public override void LogicUpdate()
+    {
+        base.LogicUpdate();
+        if (isAnimationFinished)
+        {
+            stateMachine.ChangeState(boss.moveState);
+        }
+    }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+    }
+
     public override void TriggerAttack()
     {
         base.TriggerAttack();
-        stateMachine.ChangeState(boss.moveState);
     }
 }

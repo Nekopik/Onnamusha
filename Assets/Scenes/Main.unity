@@ -799,8 +799,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityData: {fileID: 11400000, guid: 5ddec279e8fd05546a1f7e595b33af39, type: 2}
-  meleeCooldown: 1
-  rangeCooldown: 2
   wallCheck: {fileID: 1529246724}
   ledgeCheck: {fileID: 1826552358}
   playerCheck: {fileID: 1516034869}
@@ -813,6 +811,8 @@ MonoBehaviour:
   rangeAttackStateData: {fileID: 11400000, guid: 17c4ad9f74cb7e14c918aae2f6714450, type: 2}
   meleeAttackPosition: {fileID: 667037397}
   rangeAttackPosition: {fileID: 1421973422}
+  meleeCooldown: 1
+  rangeCooldown: 2
 --- !u!212 &617537846
 SpriteRenderer:
   m_ObjectHideFlags: 0

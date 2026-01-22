@@ -15,6 +15,7 @@ public class Boss_MoveState : MoveState
 
     public override void Enter()
     {
+        Debug.Log("Boss Move State");
         base.Enter();
     }
 
@@ -29,8 +30,7 @@ public class Boss_MoveState : MoveState
 
         if (!isPlayerInMaxAggroRange)
         {
-            stateMachine.ChangeState(boss.idleState);
-            return;
+            entity.Flip();
         }
 
         if (isPlayerInMinAggroRange && boss.CanMeleeAttack())

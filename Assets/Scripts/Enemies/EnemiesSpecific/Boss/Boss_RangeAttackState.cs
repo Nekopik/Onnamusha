@@ -8,6 +8,22 @@ public class Boss_RangeAttackState : RangeAttackState
         this.boss = boss;
     }
 
+    public override void DoChecks()
+    {
+        base.DoChecks();
+    }
+
+    public override void Enter()
+    {
+        Debug.Log("Boss Range Attack State");
+        base.Enter();
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+    }
+
     public override void FinishAttack()
     {
         base.FinishAttack();
@@ -15,10 +31,23 @@ public class Boss_RangeAttackState : RangeAttackState
         boss.SetRangeAttackOnCooldown();
     }
 
+    public override void LogicUpdate()
+    {
+        base.LogicUpdate();
+
+        if (isAnimationFinished)
+        {
+            stateMachine.ChangeState(boss.moveState);
+        }
+    }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+    }
+
     public override void TriggerAttack()
     {
         base.TriggerAttack();
-
-        stateMachine.ChangeState(boss.moveState);
     }
 }
