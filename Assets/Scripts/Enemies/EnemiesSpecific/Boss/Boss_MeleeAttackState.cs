@@ -7,4 +7,16 @@ public class Boss_MeleeAttackState : MeleeAttackState
     {
         this.boss = boss;
     }
+
+    public override void FinishAttack()
+    {
+        base.FinishAttack();
+        boss.SetMeleeAttackOnCooldown();
+    }
+
+    public override void TriggerAttack()
+    {
+        base.TriggerAttack();
+        stateMachine.ChangeState(boss.moveState);
+    }
 }

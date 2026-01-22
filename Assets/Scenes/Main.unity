@@ -528,7 +528,7 @@ Transform:
   m_GameObject: {fileID: 494539817}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.01, y: -16.44, z: 0}
+  m_LocalPosition: {x: 9.01, y: -16.73, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -799,14 +799,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityData: {fileID: 11400000, guid: 5ddec279e8fd05546a1f7e595b33af39, type: 2}
+  meleeCooldown: 1
+  rangeCooldown: 2
   wallCheck: {fileID: 1529246724}
   ledgeCheck: {fileID: 1826552358}
   playerCheck: {fileID: 1516034869}
   groundCheck: {fileID: 41437226}
+  moveStateData: {fileID: 11400000, guid: cf8669a203a376c4b99967e80999e893, type: 2}
   playerDetectedData: {fileID: 11400000, guid: 9c5e7150e85b8854cb105b45c612e914, type: 2}
   deadStateData: {fileID: 11400000, guid: abbdc3e6b295e274d83aa70397a13d31, type: 2}
   meleeAttackStateData: {fileID: 11400000, guid: 794199a54b228f94d8d275035d8c5e47, type: 2}
   idleStateData: {fileID: 11400000, guid: 235fcc9a802230e4496a85ef71cb5d77, type: 2}
+  rangeAttackStateData: {fileID: 11400000, guid: 17c4ad9f74cb7e14c918aae2f6714450, type: 2}
   meleeAttackPosition: {fileID: 667037397}
   rangeAttackPosition: {fileID: 1421973422}
 --- !u!212 &617537846
@@ -5648,6 +5652,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1374475362}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1844978233
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1844978234}
+  m_Layer: 0
+  m_Name: BossFightStartPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1844978234
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844978233}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.54, y: 22.34, z: -0.009482964}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1920406821
 GameObject:
@@ -91307,3 +91342,4 @@ SceneRoots:
   - {fileID: 617537847}
   - {fileID: 43799543}
   - {fileID: 790572696}
+  - {fileID: 1844978234}

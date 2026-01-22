@@ -27,9 +27,9 @@ public class Boss_IdleState : IdleState
     {
         base.LogicUpdate();
 
-        if (isPlayerInMinAggroRange)
+        if (isPlayerInMaxAggroRange)
         {
-            stateMachine.ChangeState(boss.playerDetectedState);
+            stateMachine.ChangeState(boss.moveState);
         }
     }
 

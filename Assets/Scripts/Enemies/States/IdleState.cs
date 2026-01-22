@@ -6,6 +6,7 @@ public class IdleState : State
     protected bool flipAfteridle;
     protected bool isIdleTimeOver;
     protected bool isPlayerInMinAggroRange;
+    protected bool isPlayerInMaxAggroRange;
     protected float idleTime;
     public IdleState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, D_IdleState state) : base(entity, stateMachine, animBoolName)
     {
@@ -16,6 +17,7 @@ public class IdleState : State
     {
         base.DoChecks();
         isPlayerInMinAggroRange = entity.CheckPlayerInMinAggroRange();
+        isPlayerInMaxAggroRange = entity.CheckPlayerInMaxAggroRange();
     }
 
     public override void Enter()
