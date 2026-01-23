@@ -11,8 +11,9 @@ public class PlayerCombatController : MonoBehaviour
     [SerializeField] private float stunDamageAmount = 1f;
     [SerializeField] private float projectileDamage = 10f;
     [SerializeField] private float projectileCooldown = 2f;
+    [SerializeField] private float blockDamageMultiplier = 0f;
 
-    private bool gotInput, isAttacking, isFirstAttack;
+    private bool gotInput, isAttacking, isFirstAttack, isBlocking;
 
     private float lastInputTime = Mathf.NegativeInfinity;
     private float lastProjectileTime = Mathf.NegativeInfinity;
@@ -37,6 +38,7 @@ public class PlayerCombatController : MonoBehaviour
 
     private void Update()
     {
+        CheckBlockInput();
         CheckCombatInput();
         CheckAttacks();
     }
@@ -86,6 +88,12 @@ public class PlayerCombatController : MonoBehaviour
 
     }
 
+    private void CheckBlockInput()
+    {
+        isBlocking = Input.GetKey(KeyCode.LeftShift) && combatEnabled && !isAttacking;
+        anim.SetBool("Block", isBlocking);
+    }
+
     private void CheckAttackHitBox()
     {
         Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attack1HitBoxPos.position, attack1Radius, whatIsDamagable);
@@ -132,6 +140,15 @@ public class PlayerCombatController : MonoBehaviour
 
     private void Damage(AttackDetails attackDetails)
     {
+        if (isBlocking)
+        {
+            anim.SetTrigger("BlockHit");
+
+            PS.DecreaseHealth(attackDetails.damageAmount * blockDamageMultiplier);
+            Debug.Log("Blocked!");
+            return;
+        }
+
         int direction;
 
         PS.DecreaseHealth(attackDetails.damageAmount);
