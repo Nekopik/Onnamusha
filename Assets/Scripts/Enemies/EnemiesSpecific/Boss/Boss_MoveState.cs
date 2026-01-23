@@ -28,9 +28,10 @@ public class Boss_MoveState : MoveState
     {
         base.LogicUpdate();
 
-        if (!isPlayerInMaxAggroRange)
+        if (!isPlayerInMaxAggroRange && boss.CanFlip())
         {
             entity.Flip();
+            boss.SetFlipOnCooldown();
         }
 
         if (isPlayerInMinAggroRange && boss.CanMeleeAttack())

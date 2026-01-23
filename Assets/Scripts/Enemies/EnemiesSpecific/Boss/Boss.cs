@@ -22,8 +22,10 @@ public class Boss : Entity
 
     [SerializeField] private float meleeCooldown = 5f;
     [SerializeField] private float rangeCooldown = 10f;
+    [SerializeField] private float flipCooldown = 1.5f;
     private float lastMeleeAttackTime = -Mathf.Infinity;
     private float lastRangeAttackTime = -Mathf.Infinity;
+    private float lastFlipTime = -Mathf.Infinity;
 
 
 
@@ -68,6 +70,11 @@ public class Boss : Entity
         return Time.time >= lastRangeAttackTime + rangeCooldown;
     }
 
+    public bool CanFlip()
+    {
+        return Time.time >= lastFlipTime + flipCooldown;
+    }
+
     public void SetMeleeAttackOnCooldown()
     {
         lastMeleeAttackTime = Time.time;
@@ -76,6 +83,11 @@ public class Boss : Entity
     public void SetRangeAttackOnCooldown()
     {
         lastRangeAttackTime = Time.time;
+    }
+
+    public void SetFlipOnCooldown()
+    {
+        lastFlipTime = Time.time;
     }
 
 
