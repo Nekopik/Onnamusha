@@ -16,6 +16,7 @@ public class Boss_DeadState : DeadState
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("Boss Dead State");
     }
 
     public override void Exit()

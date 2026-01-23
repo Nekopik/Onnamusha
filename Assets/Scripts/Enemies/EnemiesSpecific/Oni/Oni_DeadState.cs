@@ -16,6 +16,8 @@ public class Oni_DeadState : DeadState
     public override void Enter()
     {
         base.Enter();
+
+        enemy.gameObject.SetActive(false);
     }
 
     public override void Exit()

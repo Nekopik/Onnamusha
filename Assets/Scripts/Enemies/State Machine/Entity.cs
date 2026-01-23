@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections;
 
 public class Entity : MonoBehaviour
 {
@@ -104,6 +105,9 @@ public class Entity : MonoBehaviour
 
     public virtual void Damage(AttackDetails attackDetails)
     {
+        if (isDead)
+            return;
+
         lastDamageTime = Time.time;
         currentHealth -= attackDetails.damageAmount;
         currentStunResistance -= attackDetails.stunDamageAmount;
@@ -145,6 +149,17 @@ public class Entity : MonoBehaviour
     {
         facingDirection *= -1;
         aliveGameObject.transform.Rotate(0f, 180f, 0f);
+    }
+
+    public virtual void OnDeathAnimationFinished()
+    {
+        StartCoroutine(EndGameRoutine());
+    }
+
+    private IEnumerator EndGameRoutine()
+    {
+        yield return new WaitForSeconds(1f);
+        Time.timeScale = 0f;
     }
 
     public virtual void OnDrawGizmos()

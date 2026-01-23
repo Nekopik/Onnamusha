@@ -13,12 +13,12 @@ public class PlayerController : MonoBehaviour
     private float movementInputDirection;
     private float dashTimeLeft;
     private float knockbackStartTime;
-    [SerializeField]
-    private float knockbackDuration;
+    [SerializeField] private float knockbackDuration;
     //private float lastImageXpos;
     //private float lastDash = -100f;
     private float turnTimer = 0.15f;
     private float turnTimerSet = 0.1f;
+
     private bool isFacingRight = true;
     private bool isRunning;
     private bool isGrounded;
@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     private bool isDead;
     private bool isDashing;
     private bool knockback;
+
     private int leftJumps;
     public int facingDirection = 1;
 

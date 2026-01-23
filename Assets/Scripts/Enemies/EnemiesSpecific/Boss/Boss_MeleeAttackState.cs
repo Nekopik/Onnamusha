@@ -3,6 +3,7 @@ using UnityEngine;
 public class Boss_MeleeAttackState : MeleeAttackState
 {
     private Boss boss;
+    private Boss_AIBrain boss_AIBrain;
     public Boss_MeleeAttackState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, Transform attackPosition, D_MeleeAttackState stateData, Boss boss) : base(entity, stateMachine, animBoolName, attackPosition, stateData)
     {
         this.boss = boss;
@@ -28,6 +29,7 @@ public class Boss_MeleeAttackState : MeleeAttackState
     {
         base.FinishAttack();
         boss.SetMeleeAttackOnCooldown();
+        boss_AIBrain.RegisterMeleeAttack();
     }
 
     public override void LogicUpdate()

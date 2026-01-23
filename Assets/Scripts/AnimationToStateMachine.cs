@@ -1,8 +1,10 @@
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class AnimationToStateMachine : MonoBehaviour
 {
     public AttackState attackState;
+    public Entity entity;
 
 
     private void TriggerAttack()
@@ -13,5 +15,13 @@ public class AnimationToStateMachine : MonoBehaviour
     private void FinishAttack()
     {
         attackState.FinishAttack();
+    }
+
+    public void FinishDeath()
+    {
+        if (entity != null)
+        {
+            entity.OnDeathAnimationFinished();
+        }
     }
 }

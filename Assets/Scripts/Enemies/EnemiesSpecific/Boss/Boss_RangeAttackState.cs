@@ -3,6 +3,7 @@ using UnityEngine;
 public class Boss_RangeAttackState : RangeAttackState
 {
     private Boss boss;
+    private Boss_AIBrain boss_AIBrain;
     public Boss_RangeAttackState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, Transform attackPosition, D_RangeAttackState stateData, Boss boss) : base(entity, stateMachine, animBoolName, attackPosition, stateData)
     {
         this.boss = boss;
@@ -29,6 +30,7 @@ public class Boss_RangeAttackState : RangeAttackState
         base.FinishAttack();
 
         boss.SetRangeAttackOnCooldown();
+        boss_AIBrain.RegisterRangeAttack();
     }
 
     public override void LogicUpdate()

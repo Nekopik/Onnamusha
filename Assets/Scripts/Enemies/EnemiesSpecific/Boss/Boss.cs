@@ -3,6 +3,12 @@ using UnityEngine;
 
 public class Boss : Entity
 {
+
+    public enum BossMode
+    {
+        Aggressive,
+        Passive
+    }
     public Boss_MoveState moveState { get; private set; }
     public Boss_DeadState deadState { get; private set; }
     public Boss_PlayerDetectedState playerDetectedState { get; private set; }
@@ -20,9 +26,18 @@ public class Boss : Entity
     [SerializeField] private Transform meleeAttackPosition;
     [SerializeField] private Transform rangeAttackPosition;
 
-    [SerializeField] private float meleeCooldown = 5f;
-    [SerializeField] private float rangeCooldown = 10f;
+    [SerializeField] public float meleeCooldown = 5f;
+    [SerializeField] public float rangeCooldown = 10f;
+
+    [SerializeField] private float aggressiveMeleeCooldown = 3f;
+    [SerializeField] private float aggressiveRangeCooldown = 15f;
+
+    [SerializeField] private float passiveMeleeCooldown = 10f;
+    [SerializeField] private float passiveRangeCooldown = 3f;
+
     [SerializeField] private float flipCooldown = 1.5f;
+    [SerializeField] public BossMode currentMode = BossMode.Passive;
+
     private float lastMeleeAttackTime = -Mathf.Infinity;
     private float lastRangeAttackTime = -Mathf.Infinity;
     private float lastFlipTime = -Mathf.Infinity;
@@ -60,14 +75,32 @@ public class Boss : Entity
         */
     }
 
-    public bool CanMeleeAttack()
+    public bool OldCanMeleeAttack()
     {
         return Time.time >= lastMeleeAttackTime + meleeCooldown;
     }
 
-    public bool CanRangeAttack()
+    public bool OldCanRangeAttack()
     {
         return Time.time >= lastRangeAttackTime + rangeCooldown;
+    }
+
+    public bool CanMeleeAttack()
+    {
+        float cooldown = currentMode == BossMode.Aggressive
+            ? aggressiveMeleeCooldown
+            : passiveMeleeCooldown;
+
+        return Time.time >= lastMeleeAttackTime + cooldown;
+    }
+
+    public bool CanRangeAttack()
+    {
+        float cooldown = currentMode == BossMode.Aggressive
+            ? aggressiveRangeCooldown
+            : passiveRangeCooldown;
+
+        return Time.time >= lastRangeAttackTime + cooldown;
     }
 
     public bool CanFlip()
@@ -89,6 +122,30 @@ public class Boss : Entity
     {
         lastFlipTime = Time.time;
     }
+
+    //TODO: add charge attack state and special attack state
+    public bool ShouldChargePlayer(float distanceToPlayer, float chargeDistance)
+    {
+        return currentMode == BossMode.Aggressive && distanceToPlayer > chargeDistance;
+    }
+
+    public bool CanUseSpecialAttack()
+    {
+        return currentMode == BossMode.Passive;
+    }
+
+
+    //AI Stuff
+    public void SetMode(BossMode mode)
+    {
+        if (currentMode == mode)
+            return;
+
+        currentMode = mode;
+
+        Debug.Log("Boss mode switched to: " + mode);
+    }
+
 
 
     /*
