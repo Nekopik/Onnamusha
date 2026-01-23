@@ -8,12 +8,12 @@ public class Projectile : MonoBehaviour
     private AttackDetails attackDetails;
     private Rigidbody2D rb;
 
-    public void Setup(AttackDetails details, int direction)
+    public void Setup(AttackDetails details, int facingDirection)
     {
         attackDetails = details;
 
         rb = GetComponent<Rigidbody2D>();
-        rb.linearVelocity = new Vector2(speed * direction, 0);
+        rb.linearVelocity = new Vector2(speed * facingDirection, 0);
 
         Destroy(gameObject, lifeTime);
     }

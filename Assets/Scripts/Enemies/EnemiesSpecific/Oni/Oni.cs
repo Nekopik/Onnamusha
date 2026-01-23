@@ -35,7 +35,7 @@ public class Oni : Entity
         stunState = new Oni_StunState(this, stateMachine, "Stun", stunStateData, this);
         deadState = new Oni_DeadState(this, stateMachine, "Dead", deadStateData, this);
 
-        stateMachine.Initialize(moveState);
+        stateMachine.Initialize(idleState);
     }
 
     public override void Damage(AttackDetails attackDetails)

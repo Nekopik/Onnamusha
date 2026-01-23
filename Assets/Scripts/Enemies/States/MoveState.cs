@@ -7,6 +7,7 @@ public class MoveState : State
     protected bool isDetectingWall;
     protected bool isDetectingLedge;
     protected bool isPlayerInMinAggroRange;
+    protected bool isPlayerInMaxAggroRange;
 
     public MoveState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, D_MoveState stateData) : base(entity, stateMachine, animBoolName)
     {
@@ -20,6 +21,7 @@ public class MoveState : State
         isDetectingLedge = entity.CheckLedge();
         isDetectingWall = entity.CheckWall();
         isPlayerInMinAggroRange = entity.CheckPlayerInMinAggroRange();
+        isPlayerInMaxAggroRange = entity.CheckPlayerInMaxAggroRange();
     }
 
     public override void Enter()

@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections;
 
 public class Entity : MonoBehaviour
 {
@@ -104,27 +105,31 @@ public class Entity : MonoBehaviour
 
     public virtual void Damage(AttackDetails attackDetails)
     {
-        lastDamageTime = Time.time;
-        currentHealth -= attackDetails.damageAmount;
-        currentStunResistance -= attackDetails.stunDamageAmount;
-        DamageHop(entityData.damageHopSpeed);
+        if (!isDead)
+        {
 
-        if(attackDetails.position.x > aliveGameObject.transform.position.x)
-        {
-            lastDamageDirection = -1;
-        }
-        else
-        {
-            lastDamageDirection = 1;
-        }
+            lastDamageTime = Time.time;
+            currentHealth -= attackDetails.damageAmount;
+            currentStunResistance -= attackDetails.stunDamageAmount;
+            DamageHop(entityData.damageHopSpeed);
 
-        if (currentHealth <= 0)
-        {
-            isDead = true;
-        }
-        else if (currentStunResistance <= 0)
-        {
-            isStuned = true;
+            if (attackDetails.position.x > aliveGameObject.transform.position.x)
+            {
+                lastDamageDirection = -1;
+            }
+            else
+            {
+                lastDamageDirection = 1;
+            }
+
+            if (currentHealth <= 0)
+            {
+                isDead = true;
+            }
+            else if (currentStunResistance <= 0)
+            {
+                isStuned = true;
+            }
         }
     }
 
@@ -145,6 +150,17 @@ public class Entity : MonoBehaviour
     {
         facingDirection *= -1;
         aliveGameObject.transform.Rotate(0f, 180f, 0f);
+    }
+
+    public virtual void OnDeathAnimationFinished()
+    {
+        StartCoroutine(EndGameRoutine());
+    }
+
+    private IEnumerator EndGameRoutine()
+    {
+        yield return new WaitForSeconds(1f);
+        Time.timeScale = 0f;
     }
 
     public virtual void OnDrawGizmos()

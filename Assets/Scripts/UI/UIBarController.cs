@@ -6,7 +6,7 @@ public class UIBarController : MonoBehaviour
     public Image hpBarFill;
     public Image expBarFill;
 
-    private PlayerStats playerStats; // Assuming PlayerStats is another script you have
+    private PlayerStats playerStats;
 
     private void Start()
     {
@@ -44,8 +44,8 @@ public class UIBarController : MonoBehaviour
             hpBarFill.fillAmount = Mathf.Clamp01(healthRatio);
 
             // Log values to help debug
-            Debug.Log($"Current Health: {playerStats.currentHealth}, Max Health: {playerStats.maxHealth}");
-            Debug.Log($"Calculated Health Ratio: {healthRatio}, Set Fill Amount: {hpBarFill.fillAmount}");
+            //Debug.Log($"Current Health: {playerStats.currentHealth}, Max Health: {playerStats.maxHealth}");
+            //Debug.Log($"Calculated Health Ratio: {healthRatio}, Set Fill Amount: {hpBarFill.fillAmount}");
 
             // EXP bar is explicitly 0.0f
             expBarFill.fillAmount = 0.0f;

@@ -4,6 +4,7 @@ public class AttackState : State
 {
     protected bool isAnimationFinished;
     protected bool isPlayerInMinAggroRange;
+    protected bool isPlayerInMaxAggroRange;
 
     protected Transform attackPosition;
     public AttackState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, Transform attackPosition) : base(entity, stateMachine, animBoolName)
@@ -16,6 +17,7 @@ public class AttackState : State
         base.DoChecks();
 
         isPlayerInMinAggroRange = entity.CheckPlayerInMinAggroRange();
+        isPlayerInMaxAggroRange = entity.CheckPlayerInMaxAggroRange();
     }
 
     public override void Enter()
