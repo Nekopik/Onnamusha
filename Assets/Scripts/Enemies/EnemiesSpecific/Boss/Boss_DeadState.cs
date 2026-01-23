@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Boss_DeadState : DeadState
 {
+    private Collider2D[] colliders;
     private Boss boss;
     public Boss_DeadState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, D_DeadState stateData, Boss boss) : base(entity, stateMachine, animBoolName, stateData)
     {
@@ -17,6 +18,8 @@ public class Boss_DeadState : DeadState
     {
         base.Enter();
         Debug.Log("Boss Dead State");
+
+        entity.SetVelocity(0f);
     }
 
     public override void Exit()

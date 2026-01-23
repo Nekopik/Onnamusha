@@ -78,11 +78,13 @@ public class Boss_AIBrain : MonoBehaviour
     // Attack tracking
     public void RegisterMeleeAttack()
     {
+        Debug.Log("Melee Attack done");
         meleeAttacks++;
     }
 
     public void RegisterRangeAttack()
     {
+        Debug.Log("Range Attack done");
         rangeAttacks++;
     }
 }

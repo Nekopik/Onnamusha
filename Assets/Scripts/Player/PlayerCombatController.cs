@@ -21,7 +21,9 @@ public class PlayerCombatController : MonoBehaviour
 
     private PlayerController PC;
     private PlayerStats PS;
-    
+
+    [SerializeField] private Boss_AIBrain boss_AIBrain;
+
 
     private Animator anim;
 
@@ -47,6 +49,7 @@ public class PlayerCombatController : MonoBehaviour
             {
                 gotInput = true;
                 lastInputTime = Time.time;
+                boss_AIBrain.RegisterMeleeAttack();
             }
         }
 
@@ -56,6 +59,7 @@ public class PlayerCombatController : MonoBehaviour
             {
                 FireProjectile();
                 lastProjectileTime = Time.time;
+                boss_AIBrain.RegisterRangeAttack();
             }
         }
     }

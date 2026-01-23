@@ -105,30 +105,31 @@ public class Entity : MonoBehaviour
 
     public virtual void Damage(AttackDetails attackDetails)
     {
-        if (isDead)
-            return;
+        if (!isDead)
+        {
 
-        lastDamageTime = Time.time;
-        currentHealth -= attackDetails.damageAmount;
-        currentStunResistance -= attackDetails.stunDamageAmount;
-        DamageHop(entityData.damageHopSpeed);
+            lastDamageTime = Time.time;
+            currentHealth -= attackDetails.damageAmount;
+            currentStunResistance -= attackDetails.stunDamageAmount;
+            DamageHop(entityData.damageHopSpeed);
 
-        if(attackDetails.position.x > aliveGameObject.transform.position.x)
-        {
-            lastDamageDirection = -1;
-        }
-        else
-        {
-            lastDamageDirection = 1;
-        }
+            if (attackDetails.position.x > aliveGameObject.transform.position.x)
+            {
+                lastDamageDirection = -1;
+            }
+            else
+            {
+                lastDamageDirection = 1;
+            }
 
-        if (currentHealth <= 0)
-        {
-            isDead = true;
-        }
-        else if (currentStunResistance <= 0)
-        {
-            isStuned = true;
+            if (currentHealth <= 0)
+            {
+                isDead = true;
+            }
+            else if (currentStunResistance <= 0)
+            {
+                isStuned = true;
+            }
         }
     }
 

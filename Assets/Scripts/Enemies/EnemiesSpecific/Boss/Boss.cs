@@ -61,6 +61,9 @@ public class Boss : Entity
 
     public override void Damage(AttackDetails attackDetails)
     {
+        if (stateMachine.currentState == deadState)
+            return;
+
         base.Damage(attackDetails);
 
         if (isDead)
@@ -73,16 +76,6 @@ public class Boss : Entity
             stateMachine.ChangeState(stunState);
         }
         */
-    }
-
-    public bool OldCanMeleeAttack()
-    {
-        return Time.time >= lastMeleeAttackTime + meleeCooldown;
-    }
-
-    public bool OldCanRangeAttack()
-    {
-        return Time.time >= lastRangeAttackTime + rangeCooldown;
     }
 
     public bool CanMeleeAttack()
