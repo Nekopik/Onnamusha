@@ -152,6 +152,14 @@ public class Entity : MonoBehaviour
         aliveGameObject.transform.Rotate(0f, 180f, 0f);
     }
 
+    public void SetFacingDirection(int direction)
+    {
+        if (direction != facingDirection)
+        {
+            Flip();
+        }
+    }
+
     public virtual void OnDeathAnimationFinished()
     {
         StartCoroutine(EndGameRoutine());

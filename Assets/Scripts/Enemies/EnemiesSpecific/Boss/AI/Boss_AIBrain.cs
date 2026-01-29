@@ -62,9 +62,16 @@ public class Boss_AIBrain : MonoBehaviour
         float decision = output[0];
 
         if (decision > 0.5f)
+        {
             boss.SetMode(BossMode.Aggressive);
+            Debug.Log("Aggressive mode");
+        }
+            
         else
+        {
             boss.SetMode(BossMode.Passive);
+            Debug.Log("Passive mode");
+        }
 
         input.Dispose();
         output.Dispose();
@@ -87,5 +94,8 @@ public class Boss_AIBrain : MonoBehaviour
         Debug.Log("Range Attack done");
         rangeAttacks++;
     }
+
+    //Data saving for AI learning
+
 }
 
