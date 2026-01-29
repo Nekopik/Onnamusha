@@ -1082,6 +1082,7 @@ MonoBehaviour:
   meleeAttackPosition: {fileID: 667037397}
   rangeAttackPosition: {fileID: 1421973422}
   basePosition: {fileID: 651056700}
+  player: {fileID: 824865200}
   meleeCooldown: 1
   rangeCooldown: 2
   aggressiveMeleeCooldown: 1.2
@@ -2060,6 +2061,54 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1103802357
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1103802359}
+  - component: {fileID: 1103802358}
+  m_Layer: 0
+  m_Name: MobFightTracker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1103802358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103802357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33912bdc8a7f54b4999be4093173e13c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStats: {fileID: 1168107591}
+  mobName: Oni
+  maxFightDuration: 10
+  mobFightActive: 0
+--- !u!4 &1103802359
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103802357}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.021, y: 0.84049994, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1164865586
 GameObject:
   m_ObjectHideFlags: 0
@@ -2196,6 +2245,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1164865586}
   m_CullTransparentMesh: 1
+--- !u!114 &1168107591 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8901810474628460144, guid: a791d034f10003b479686028308b550d, type: 3}
+  m_PrefabInstance: {fileID: 5807593266943911279}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 009518fa8e1360d4993ca4bc49351b8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1177304567
 GameObject:
   m_ObjectHideFlags: 0
@@ -92168,6 +92228,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Oni
       objectReference: {fileID: 0}
+    - target: {fileID: 4629070186131557573, guid: a4d8cb8e9b665864c96bb631c3dce86b, type: 3}
+      propertyPath: mobFightTracker
+      value: 
+      objectReference: {fileID: 1103802358}
     - target: {fileID: 7417122804153657082, guid: a4d8cb8e9b665864c96bb631c3dce86b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.08
@@ -92295,3 +92359,4 @@ SceneRoots:
   - {fileID: 1844978234}
   - {fileID: 2112213888}
   - {fileID: 651056700}
+  - {fileID: 1103802359}

@@ -25,6 +25,11 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    public float GetHPPercent()
+    {
+        return currentHealth / maxHealth;
+    }
+
     public void AddXP(float amount)
     {
         currentXP += amount;

@@ -26,6 +26,7 @@ public class Boss : Entity
     [SerializeField] private Transform meleeAttackPosition;
     [SerializeField] private Transform rangeAttackPosition;
     [SerializeField] public Transform basePosition;
+    [SerializeField] public Transform player;
 
     [SerializeField] public float meleeCooldown = 5f;
     [SerializeField] public float rangeCooldown = 10f;

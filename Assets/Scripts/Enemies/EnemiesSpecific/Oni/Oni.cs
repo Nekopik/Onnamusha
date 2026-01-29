@@ -20,6 +20,8 @@ public class Oni : Entity
     [SerializeField] private D_StunState stunStateData;
     [SerializeField] private D_DeadState deadStateData;
 
+    [SerializeField] private Oni_FightTracker mobFightTracker;
+
     [SerializeField] private Transform meleeAttackPosition;
 
     public override void Start()
@@ -42,9 +44,13 @@ public class Oni : Entity
     {
         base.Damage(attackDetails);
 
+        if (!mobFightTracker.mobFightActive)
+            mobFightTracker.StartFight();
+
         if (isDead)
         {
             stateMachine.ChangeState(deadState);
+            mobFightTracker.EndFight();
         }
         else if (isStuned && stateMachine.currentState != stunState)
         {
