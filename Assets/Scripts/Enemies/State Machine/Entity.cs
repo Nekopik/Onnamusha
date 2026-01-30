@@ -63,7 +63,7 @@ public class Entity : MonoBehaviour
 
     public virtual void SetVelocity(float velocity)
     {
-        velocityWorkspace.Set(facingDirection * velocity, rb.linearVelocityY);
+        velocityWorkspace.Set(facingDirection * velocity, rb.linearVelocity.y);
         rb.linearVelocity = velocityWorkspace;
     }
 
