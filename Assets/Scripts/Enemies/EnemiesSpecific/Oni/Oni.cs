@@ -40,6 +40,12 @@ public class Oni : Entity
         stateMachine.Initialize(idleState);
     }
 
+    private void Awake()
+    {
+        if (mobFightTracker == null)
+            mobFightTracker = FindFirstObjectByType<Oni_FightTracker>();
+    }
+
     public override void Damage(AttackDetails attackDetails)
     {
         base.Damage(attackDetails);
