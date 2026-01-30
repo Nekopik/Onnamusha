@@ -55,8 +55,8 @@ public class Oni : Entity
 
         if (isDead)
         {
-            stateMachine.ChangeState(deadState);
             mobFightTracker.EndFight();
+            stateMachine.ChangeState(deadState);
         }
         else if (isStuned && stateMachine.currentState != stunState)
         {

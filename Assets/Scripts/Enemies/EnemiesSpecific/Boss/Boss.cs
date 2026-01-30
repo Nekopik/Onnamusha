@@ -134,11 +134,13 @@ public class Boss : Entity
     public void SetBossFightActive()
     {
         isFightActive = true;
+        Debug.Log("Boss fight activated");
     }
 
     public void SetBossFightInactive()
     {
         isFightActive = false;
+        Debug.Log("Boss fight deactivated");
     }
 
 

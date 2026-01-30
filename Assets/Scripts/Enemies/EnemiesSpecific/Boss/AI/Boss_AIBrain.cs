@@ -27,6 +27,7 @@ public class Boss_AIBrain : MonoBehaviour
 
     void Update()
     {
+        /*
         if (!bossFightStarted)
             return;
 
@@ -37,6 +38,7 @@ public class Boss_AIBrain : MonoBehaviour
             decisionTimer = 0f;
             DecideMode();
         }
+        */
     }
 
     public void StartBossFight()

@@ -11,6 +11,10 @@ public class Oni_FightTracker : MonoBehaviour
     public float maxFightDuration = 10f;
     public bool mobFightActive = false;
 
+    public float fightAmount;
+    public float allFightDuration;
+    public float averageFightDuration;
+
     private float fightStartTime;
     private float playerStartHP;
 
@@ -53,6 +57,11 @@ public class Oni_FightTracker : MonoBehaviour
         float fightEndTime = Time.time;
         float duration = Mathf.Min(fightEndTime - fightStartTime, maxFightDuration);
 
+        fightAmount++;
+        allFightDuration += duration;
+        averageFightDuration = allFightDuration / fightAmount;
+
+
         float playerEndHP = playerStats.GetHPPercent();
 
         LogFight(mobName, playerStartHP, playerEndHP, duration);
@@ -72,7 +81,7 @@ public class Oni_FightTracker : MonoBehaviour
 
         File.AppendAllText(logPath, sb.ToString());
 
-        Debug.Log($"Fight logged: {mob}, duration {duration:F2}s");
+        Debug.Log($"Fight logged: {mob}, duration {duration:F2}s, fight amount {fightAmount}");
     }
 
     public void ForceEndFight()

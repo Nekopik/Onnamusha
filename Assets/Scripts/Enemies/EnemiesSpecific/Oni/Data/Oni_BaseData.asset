@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Oni_BaseData
   m_EditorClassIdentifier: 
   maxHealth: 30
-  damageHopSpeed: 2
+  damageHopSpeed: 1.5
   wallCheckDistance: 0.2
   ledgeCheckDistance: 0.5
   minAggroDistance: 2
