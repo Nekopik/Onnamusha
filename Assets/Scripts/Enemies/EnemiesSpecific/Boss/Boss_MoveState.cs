@@ -3,6 +3,8 @@ using UnityEngine;
 public class Boss_MoveState : MoveState
 {
     private Boss boss;
+
+    private float stoppingDistance = 0.2f;
     public Boss_MoveState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, D_MoveState stateData, Boss boss) : base(entity, stateMachine, animBoolName, stateData)
     {
         this.boss = boss;
@@ -46,6 +48,30 @@ public class Boss_MoveState : MoveState
             return;
         }
 
+        if (!boss.isFightActive)
+        {
+            Transform bossBasePoint = boss.basePosition;
+
+            if (bossBasePoint != null)
+            {
+                float distance = Vector2.Distance(entity.transform.position, bossBasePoint.position);
+
+                if (distance <= stoppingDistance)
+                {
+                    entity.SetVelocity(0f);
+                    stateMachine.ChangeState(boss.idleState);
+                    return;
+                }
+
+                int direction = bossBasePoint.position.x > entity.transform.position.x ? 1 : -1;
+                entity.SetFacingDirection(direction);
+                entity.SetVelocity(stateData.movementSpeed);
+                return;
+            }
+
+            stateMachine.ChangeState(boss.idleState);
+            return;
+        }
     }
 
     public override void PhysicsUpdate()

@@ -63,7 +63,7 @@ public class Entity : MonoBehaviour
 
     public virtual void SetVelocity(float velocity)
     {
-        velocityWorkspace.Set(facingDirection * velocity, rb.linearVelocityY);
+        velocityWorkspace.Set(facingDirection * velocity, rb.linearVelocity.y);
         rb.linearVelocity = velocityWorkspace;
     }
 
@@ -150,6 +150,14 @@ public class Entity : MonoBehaviour
     {
         facingDirection *= -1;
         aliveGameObject.transform.Rotate(0f, 180f, 0f);
+    }
+
+    public void SetFacingDirection(int direction)
+    {
+        if (direction != facingDirection)
+        {
+            Flip();
+        }
     }
 
     public virtual void OnDeathAnimationFinished()

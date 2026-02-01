@@ -26,6 +26,7 @@ public class Oni_MeleeAttackState : MeleeAttackState
     public override void FinishAttack()
     {
         base.FinishAttack();
+        enemy.MobSetMeleeAttackOnCooldown();
     }
 
     public override void LogicUpdate()

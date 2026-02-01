@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: D_BossBaseData
   m_EditorClassIdentifier: 
   maxHealth: 150
-  damageHopSpeed: 2
+  damageHopSpeed: 0.5
   wallCheckDistance: 0.2
   ledgeCheckDistance: 0.4
   minAggroDistance: 2

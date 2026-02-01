@@ -23,7 +23,7 @@ public class Oni_PlayerDetectedState : PlayerDetectedState
     {
         base.LogicUpdate();
 
-        if (performCloseRangeAction)
+        if (performCloseRangeAction && enemy.MobCanMeleeAttack())
         {
             stateMachine.ChangeState(enemy.meleeAttackState);
         }

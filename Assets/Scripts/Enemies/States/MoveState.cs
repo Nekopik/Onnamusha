@@ -27,7 +27,6 @@ public class MoveState : State
     public override void Enter()
     {
         base.Enter();
-        entity.SetVelocity(stateData.movementSpeed);
     }
 
     public override void Exit()
@@ -43,5 +42,6 @@ public class MoveState : State
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+        entity.SetVelocity(stateData.movementSpeed);
     }
 }

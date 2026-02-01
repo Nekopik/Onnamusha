@@ -6,7 +6,7 @@ public class UIBarController : MonoBehaviour
     public Image hpBarFill;
     public Image expBarFill;
 
-    private PlayerStats playerStats;
+    [SerializeField] private PlayerStats playerStats;
 
     private void Start()
     {
@@ -37,19 +37,23 @@ public class UIBarController : MonoBehaviour
 
     private void Update()
     {
-        if (playerStats != null && hpBarFill != null)
+        // If playerStats is missing or the object was destroyed, try to find the new player
+        if (playerStats == null)
         {
-            // Ensure float division by casting
-            float healthRatio = (float)playerStats.currentHealth / playerStats.maxHealth;
-            hpBarFill.fillAmount = Mathf.Clamp01(healthRatio);
-
-            // Log values to help debug
-            //Debug.Log($"Current Health: {playerStats.currentHealth}, Max Health: {playerStats.maxHealth}");
-            //Debug.Log($"Calculated Health Ratio: {healthRatio}, Set Fill Amount: {hpBarFill.fillAmount}");
-
-            // EXP bar is explicitly 0.0f
-            expBarFill.fillAmount = 0.0f;
+            hpBarFill.fillAmount = 0f;
+            GameObject player = GameObject.FindWithTag("Player");
+            if (player != null)
+            {
+                playerStats = player.GetComponent<PlayerStats>();
+            }
+            return; // wait until we have a valid player
         }
-        // If playerStats or hpBarFill is null, the above block won't run, and error messages from Start will appear.
+
+        // HP BAR
+        float healthRatio = (float)playerStats.currentHealth / playerStats.maxHealth;
+        hpBarFill.fillAmount = Mathf.Clamp01(healthRatio);
+
+        // EXP BAR (still placeholder)
+        expBarFill.fillAmount = 0.0f;
     }
 }

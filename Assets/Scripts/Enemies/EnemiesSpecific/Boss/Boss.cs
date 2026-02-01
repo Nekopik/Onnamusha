@@ -25,6 +25,8 @@ public class Boss : Entity
 
     [SerializeField] private Transform meleeAttackPosition;
     [SerializeField] private Transform rangeAttackPosition;
+    [SerializeField] public Transform basePosition;
+    [SerializeField] public Transform player;
 
     [SerializeField] public float meleeCooldown = 5f;
     [SerializeField] public float rangeCooldown = 10f;
@@ -41,6 +43,8 @@ public class Boss : Entity
     private float lastMeleeAttackTime = -Mathf.Infinity;
     private float lastRangeAttackTime = -Mathf.Infinity;
     private float lastFlipTime = -Mathf.Infinity;
+
+    public bool isFightActive = false;
 
 
 
@@ -125,6 +129,18 @@ public class Boss : Entity
     public bool CanUseSpecialAttack()
     {
         return currentMode == BossMode.Passive;
+    }
+
+    public void SetBossFightActive()
+    {
+        isFightActive = true;
+        Debug.Log("Boss fight activated");
+    }
+
+    public void SetBossFightInactive()
+    {
+        isFightActive = false;
+        Debug.Log("Boss fight deactivated");
     }
 
 

@@ -1,7 +1,13 @@
 using UnityEngine;
+using static Boss;
 
 public class Oni : Entity
 {
+    public enum MobMode
+    {
+        Aggressive,
+        Passive
+    }
     public Oni_IdleState idleState {  get; private set; }
     public Oni_MoveState moveState { get; private set; }
     public Oni_PlayerDetectedState playerDetectedState { get; private set; }
@@ -20,7 +26,20 @@ public class Oni : Entity
     [SerializeField] private D_StunState stunStateData;
     [SerializeField] private D_DeadState deadStateData;
 
+    [SerializeField] private Oni_FightTracker mobFightTracker;
+
     [SerializeField] private Transform meleeAttackPosition;
+    [SerializeField] private Transform checkDistancePosition;
+
+    [SerializeField] public MobMode currentMobMode = MobMode.Passive;
+
+    [SerializeField] private float aggressiveMobMeleeCooldown = 0.2f;
+    [SerializeField] private float passiveMobMeleeCooldown = 3f;
+
+    [SerializeField] public float mobMeleeCooldown = 2f;
+    private float lastMeleeAttackTime = -Mathf.Infinity;
+
+    public bool isFightActive = false;
 
     public override void Start()
     {
@@ -38,18 +57,56 @@ public class Oni : Entity
         stateMachine.Initialize(idleState);
     }
 
+    private void Awake()
+    {
+        if (mobFightTracker == null)
+            mobFightTracker = FindFirstObjectByType<Oni_FightTracker>();
+    }
+
     public override void Damage(AttackDetails attackDetails)
     {
         base.Damage(attackDetails);
 
+        if (!mobFightTracker.mobFightActive)
+        {
+            mobFightTracker.StartFight();
+            isFightActive = true;
+        }
+
         if (isDead)
         {
+            mobFightTracker.EndFight();
+            isFightActive = true;
             stateMachine.ChangeState(deadState);
         }
         else if (isStuned && stateMachine.currentState != stunState)
         {
             stateMachine.ChangeState(stunState);
         } 
+    }
+
+    public void MobSetMeleeAttackOnCooldown()
+    {
+        lastMeleeAttackTime = Time.time;
+    }
+
+    public bool MobCanMeleeAttack()
+    {
+        float cooldown = currentMobMode == MobMode.Aggressive
+            ? aggressiveMobMeleeCooldown
+            : passiveMobMeleeCooldown;
+
+        return Time.time >= lastMeleeAttackTime + cooldown;
+    }
+
+    public void SetMobMode(MobMode mode)
+    {
+        if (currentMobMode == mode)
+            return;
+
+        currentMobMode = mode;
+
+        Debug.Log("Mob mode switched to: " + mode);
     }
 
     public override void OnDrawGizmos()
