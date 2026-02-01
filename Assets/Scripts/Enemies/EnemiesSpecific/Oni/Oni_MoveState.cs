@@ -22,7 +22,7 @@ public class Oni_MoveState : MoveState
     {
         base.LogicUpdate();
 
-        if (isPlayerInMinAggroRange)
+        if (isPlayerInMinAggroRange || enemy.isFightActive)
         {
             stateMachine.ChangeState(enemy.playerDetectedState);
         }

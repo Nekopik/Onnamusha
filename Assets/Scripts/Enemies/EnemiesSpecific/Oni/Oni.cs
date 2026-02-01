@@ -1,4 +1,5 @@
 using UnityEngine;
+using static Boss;
 
 public class Oni : Entity
 {
@@ -23,6 +24,12 @@ public class Oni : Entity
     [SerializeField] private Oni_FightTracker mobFightTracker;
 
     [SerializeField] private Transform meleeAttackPosition;
+    [SerializeField] private Transform checkDistancePosition;
+
+    [SerializeField] public float mobMeleeCooldown = 2f;
+    private float lastMeleeAttackTime = -Mathf.Infinity;
+
+    public bool isFightActive = false;
 
     public override void Start()
     {
@@ -51,17 +58,31 @@ public class Oni : Entity
         base.Damage(attackDetails);
 
         if (!mobFightTracker.mobFightActive)
+        {
             mobFightTracker.StartFight();
+            isFightActive = true;
+        }
 
         if (isDead)
         {
             mobFightTracker.EndFight();
+            isFightActive = true;
             stateMachine.ChangeState(deadState);
         }
         else if (isStuned && stateMachine.currentState != stunState)
         {
             stateMachine.ChangeState(stunState);
         } 
+    }
+
+    public void MobSetMeleeAttackOnCooldown()
+    {
+        lastMeleeAttackTime = Time.time;
+    }
+
+    public bool MobCanMeleeAttack()
+    {
+        return Time.time >= lastMeleeAttackTime + mobMeleeCooldown;
     }
 
     public override void OnDrawGizmos()
