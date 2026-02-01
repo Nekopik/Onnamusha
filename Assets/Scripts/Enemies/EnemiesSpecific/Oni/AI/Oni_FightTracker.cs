@@ -18,14 +18,18 @@ public class Oni_FightTracker : MonoBehaviour
 
     public float fightAmount;
     public float allFightDuration;
+
     public float averageFightDuration;
+    public float durationOfMobFight;
+    public float playerEndHP;
 
     private float fightStartTime;
     private float playerStartHP;
-    private float playerDistance;
+    //private float playerDistance;
 
-    private int mobMeleeAttacks;
-    private int mobRangeAttacks;
+    public int mobMeleeAttacks;
+    public int mobRangeAttacks;
+
     private int startMobMeleeAttacks;
     private int startMobRangeAttacks;
 
@@ -86,18 +90,18 @@ public class Oni_FightTracker : MonoBehaviour
         if (!mobFightActive) return;
 
         float fightEndTime = Time.time;
-        float duration = Mathf.Min(fightEndTime - fightStartTime, maxFightDuration);
+        durationOfMobFight = Mathf.Min(fightEndTime - fightStartTime, maxFightDuration);
 
         fightAmount++;
-        allFightDuration += duration;
+        allFightDuration += durationOfMobFight;
         averageFightDuration = allFightDuration / fightAmount;
 
         mobMeleeAttacks = (boss_AI.meleeAttacks - startMobMeleeAttacks);
         mobRangeAttacks = (boss_AI.rangeAttacks - startMobRangeAttacks);
 
-        float playerEndHP = playerStats.GetHPPercent();
+        playerEndHP = playerStats.GetHPPercent();
 
-        LogFight(mobName, playerStartHP, playerEndHP, duration, mobMeleeAttacks, mobRangeAttacks);
+        LogFight(mobName, playerStartHP, playerEndHP, durationOfMobFight, mobMeleeAttacks, mobRangeAttacks);
 
         mobFightActive = false;
 

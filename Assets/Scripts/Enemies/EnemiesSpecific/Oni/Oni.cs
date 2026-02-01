@@ -3,6 +3,11 @@ using static Boss;
 
 public class Oni : Entity
 {
+    public enum MobMode
+    {
+        Aggressive,
+        Passive
+    }
     public Oni_IdleState idleState {  get; private set; }
     public Oni_MoveState moveState { get; private set; }
     public Oni_PlayerDetectedState playerDetectedState { get; private set; }
@@ -25,6 +30,11 @@ public class Oni : Entity
 
     [SerializeField] private Transform meleeAttackPosition;
     [SerializeField] private Transform checkDistancePosition;
+
+    [SerializeField] public MobMode currentMobMode = MobMode.Passive;
+
+    [SerializeField] private float aggressiveMobMeleeCooldown = 0.2f;
+    [SerializeField] private float passiveMobMeleeCooldown = 3f;
 
     [SerializeField] public float mobMeleeCooldown = 2f;
     private float lastMeleeAttackTime = -Mathf.Infinity;
@@ -82,7 +92,21 @@ public class Oni : Entity
 
     public bool MobCanMeleeAttack()
     {
-        return Time.time >= lastMeleeAttackTime + mobMeleeCooldown;
+        float cooldown = currentMobMode == MobMode.Aggressive
+            ? aggressiveMobMeleeCooldown
+            : passiveMobMeleeCooldown;
+
+        return Time.time >= lastMeleeAttackTime + cooldown;
+    }
+
+    public void SetMobMode(MobMode mode)
+    {
+        if (currentMobMode == mode)
+            return;
+
+        currentMobMode = mode;
+
+        Debug.Log("Mob mode switched to: " + mode);
     }
 
     public override void OnDrawGizmos()
