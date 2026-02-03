@@ -37,8 +37,11 @@ public class Boss : Entity
     [SerializeField] private float passiveMeleeCooldown = 10f;
     [SerializeField] private float passiveRangeCooldown = 3f;
 
-    [SerializeField] private float flipCooldown = 1.5f;
+    [SerializeField] private float flipCooldown = 0.5f;
     [SerializeField] public BossMode currentMode = BossMode.Passive;
+    [Range(0f, 1f)] public float aiMeleePreference = 0.5f;
+    private float lastAttackDecisionTime;
+    [SerializeField] private float attackDecisionCooldown = 0.5f;
 
     private float lastMeleeAttackTime = -Mathf.Infinity;
     private float lastRangeAttackTime = -Mathf.Infinity;
@@ -143,6 +146,16 @@ public class Boss : Entity
         Debug.Log("Boss fight deactivated");
     }
 
+    public bool CanMakeAttackDecision()
+    {
+        return Time.time >= lastAttackDecisionTime + attackDecisionCooldown;
+    }
+
+    public void MarkAttackDecision()
+    {
+        lastAttackDecisionTime = Time.time;
+    }
+
 
     //AI Stuff
     public void SetMode(BossMode mode)
@@ -156,7 +169,15 @@ public class Boss : Entity
     }
 
 
+    public void SetAIPreference(float value)
+    {
+        aiMeleePreference = value;
 
+        if (value > 0.6f)
+            SetMode(BossMode.Aggressive);
+        else if (value < 0.4f)
+            SetMode(BossMode.Passive);
+    }
     /*
     public override void OnDrawGizmos()
     {
@@ -168,4 +189,6 @@ public class Boss : Entity
         Gizmos.DrawWireSphere(meleeAttackPosition.position, meleeAttackStateData.attackRadius);
     }
     */
+
+    // DEBUG
 }
