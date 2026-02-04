@@ -1,5 +1,6 @@
 using System.IO;
 using System.Text;
+using System.Globalization;
 using UnityEngine;
 
 public class Oni_FightTracker : MonoBehaviour
@@ -112,11 +113,11 @@ public class Oni_FightTracker : MonoBehaviour
     {
         StringBuilder sb = new StringBuilder();
         sb.Append(mob).Append(",");
-        sb.Append(startHP.ToString("F2")).Append(",");
-        sb.Append(endHP.ToString("F2")).Append(",");
-        sb.Append(duration.ToString("F2")).Append(",");
-        sb.Append(meleeAttacks.ToString("F2")).Append(",");
-        sb.Append(rangeAttacks.ToString("F2")).Append("\n");
+        sb.Append(startHP.ToString("F2", CultureInfo.InvariantCulture)).Append(",");
+        sb.Append(endHP.ToString("F2", CultureInfo.InvariantCulture)).Append(",");
+        sb.Append(duration.ToString("F2", CultureInfo.InvariantCulture)).Append(",");
+        sb.Append(meleeAttacks.ToString("F2", CultureInfo.InvariantCulture)).Append(",");
+        sb.Append(rangeAttacks.ToString("F2", CultureInfo.InvariantCulture)).Append("\n");
 
         File.AppendAllText(logPath, sb.ToString());
 

@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.IO;
 using System.Text;
 using UnityEngine;
@@ -52,12 +53,14 @@ public class Boss_AI_Tracker : MonoBehaviour
     void LogBossFightBuilder(float startHP, float endHP, float duration, float meleeAttacks, float rangeAttacks, float meleePreference)
     {
         StringBuilder sb = new StringBuilder();
-        sb.Append(startHP).Append(",");
-        sb.Append(endHP.ToString("F2")).Append(",");
-        sb.Append(duration.ToString("F2")).Append(",");
-        sb.Append(meleeAttacks.ToString("F2")).Append(",");
-        sb.Append(rangeAttacks.ToString("F2")).Append(",");
-        sb.Append(meleePreference.ToString("F2")).Append("\n");
+        sb.Append(startHP.ToString("F2", CultureInfo.InvariantCulture)).Append(",");
+        sb.Append(endHP.ToString("F2", CultureInfo.InvariantCulture)).Append(",");
+        sb.Append(duration.ToString("F2", CultureInfo.InvariantCulture)).Append(",");
+        sb.Append(meleeAttacks.ToString("F2", CultureInfo.InvariantCulture)).Append(",");
+        sb.Append(rangeAttacks.ToString("F2", CultureInfo.InvariantCulture)).Append(",");
+        sb.Append(meleePreference.ToString("F2", CultureInfo.InvariantCulture)).Append("\n");
+
+        File.AppendAllText(logPath, sb.ToString());
     }
 
     private void Update()

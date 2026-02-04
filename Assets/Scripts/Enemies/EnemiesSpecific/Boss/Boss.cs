@@ -81,7 +81,7 @@ public class Boss : Entity
         if (isDead)
         {
             SetBossFightInactive();
-            boss_ai_tracker.LogBossFight();
+            //boss_ai_tracker.LogBossFight();
             stateMachine.ChangeState(deadState);
         }
         /*
