@@ -8,10 +8,10 @@ public class PlayerCombatController : MonoBehaviour
     [SerializeField] private Transform projectileSpawnPoint;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private LayerMask whatIsDamagable;
-    [SerializeField] private float stunDamageAmount = 1f;
+    [SerializeField] private float stunDamageAmount = 0f;
     [SerializeField] private float projectileDamage = 10f;
     [SerializeField] private float projectileCooldown = 2f;
-    [SerializeField] private float blockDamageMultiplier = 0f;
+    [SerializeField] private float blockDamageMultiplier = 0.2f;
 
     private bool gotInput, isAttacking, isFirstAttack, isBlocking;
 
