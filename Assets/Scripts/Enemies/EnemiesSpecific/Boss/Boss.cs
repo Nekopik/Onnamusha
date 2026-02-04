@@ -37,6 +37,8 @@ public class Boss : Entity
     [SerializeField] private float passiveMeleeCooldown = 10f;
     [SerializeField] private float passiveRangeCooldown = 3f;
 
+    [SerializeField] public Boss_AI_Tracker boss_ai_tracker;
+
     [SerializeField] private float flipCooldown = 0.5f;
     [SerializeField] public BossMode currentMode = BossMode.Passive;
     [Range(0f, 1f)] public float aiMeleePreference = 0.5f;
@@ -48,6 +50,8 @@ public class Boss : Entity
     private float lastFlipTime = -Mathf.Infinity;
 
     public bool isFightActive = false;
+    public float bossStartTime;
+    public float bossEndTime;
 
 
 
@@ -75,6 +79,8 @@ public class Boss : Entity
 
         if (isDead)
         {
+            SetBossFightInactive();
+            boss_ai_tracker.LogBossFight();
             stateMachine.ChangeState(deadState);
         }
         /*
@@ -137,12 +143,14 @@ public class Boss : Entity
     public void SetBossFightActive()
     {
         isFightActive = true;
+        bossStartTime = Time.time;
         Debug.Log("Boss fight activated");
     }
 
     public void SetBossFightInactive()
     {
         isFightActive = false;
+        bossEndTime = Time.time;
         Debug.Log("Boss fight deactivated");
     }
 
@@ -179,16 +187,16 @@ public class Boss : Entity
             SetMode(BossMode.Passive);
     }
     /*
-    public override void OnDrawGizmos()
-    {
-        base.OnDrawGizmos();
+public override void OnDrawGizmos()
+{
+   base.OnDrawGizmos();
 
-        if (meleeAttackPosition == null || meleeAttackStateData == null)
-            return;
+   if (meleeAttackPosition == null || meleeAttackStateData == null)
+       return;
 
-        Gizmos.DrawWireSphere(meleeAttackPosition.position, meleeAttackStateData.attackRadius);
-    }
-    */
+   Gizmos.DrawWireSphere(meleeAttackPosition.position, meleeAttackStateData.attackRadius);
+}
+*/
 
     // DEBUG
 }

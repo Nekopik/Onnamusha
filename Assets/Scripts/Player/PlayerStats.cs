@@ -7,12 +7,14 @@ public class PlayerStats : MonoBehaviour
 
     public float currentHealth, currentXP;
 
+    private Boss boss;
     private GameManager GM;
 
     private void Start()
     {
         currentHealth = maxHealth;
         GM = GameObject.Find("GameManager").GetComponent<GameManager>();
+        boss = GameObject.Find("Boss").GetComponent<Boss>();
     }
 
     public void DecreaseHealth(float amount)
@@ -21,6 +23,7 @@ public class PlayerStats : MonoBehaviour
 
         if(currentHealth <= 0.0f)
         {
+            boss.SetBossFightInactive();
             Die();
         }
     }
