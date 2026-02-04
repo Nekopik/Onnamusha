@@ -33,4 +33,9 @@ public class BossFightStartTrigger : MonoBehaviour
             return;
         }
     }
+
+    public void SetWallInactive()
+    {
+        wall.SetActive(false);
+    }
 }

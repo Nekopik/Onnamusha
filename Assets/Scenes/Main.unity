@@ -1052,7 +1052,7 @@ GameObject:
   - component: {fileID: 617537848}
   m_Layer: 7
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1091,6 +1091,7 @@ MonoBehaviour:
   passiveMeleeCooldown: 4
   passiveRangeCooldown: 1.5
   boss_ai_tracker: {fileID: 2045349482}
+  bossFightStartTrigger: {fileID: 1844978236}
   flipCooldown: 1.5
   currentMode: 1
   aiMeleePreference: 0.5
@@ -1185,6 +1186,7 @@ MonoBehaviour:
   boss: {fileID: 617537845}
   meleeAttacks: 0
   rangeAttacks: 0
+  meleePreference: 0
   decisionInterval: 5
 --- !u!1 &619394800
 GameObject:

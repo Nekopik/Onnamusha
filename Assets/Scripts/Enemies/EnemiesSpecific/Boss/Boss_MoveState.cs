@@ -30,6 +30,8 @@ public class Boss_MoveState : MoveState
     {
         base.LogicUpdate();
 
+        if (boss.player == null) return;
+
         float actualBossX = boss.transform.Find("Alive").position.x;
         int directionToPlayer = boss.player.position.x > actualBossX ? 1 : -1;
 
@@ -41,10 +43,10 @@ public class Boss_MoveState : MoveState
 
         float meleePref = boss.aiMeleePreference;
 
-        // Aggressive mode
+        
         if (boss.CanMakeAttackDecision())
         {
-            if (isPlayerInMinAggroRange && meleePref > 0.6f && boss.CanMeleeAttack())
+            if (isPlayerInMinAggroRange && meleePref > 0.6f && boss.CanMeleeAttack() && boss.isFightActive)
             {
                 boss.MarkAttackDecision();
                 stateMachine.ChangeState(boss.meleeAttackState);
@@ -52,7 +54,7 @@ public class Boss_MoveState : MoveState
             }
 
             // Passive mode
-            if (meleePref < 0.4f && boss.CanRangeAttack())
+            if (meleePref < 0.4f && boss.CanRangeAttack() && boss.isFightActive)
             {
                 boss.MarkAttackDecision();
                 stateMachine.ChangeState(boss.rangeAttackState);
@@ -60,7 +62,7 @@ public class Boss_MoveState : MoveState
             }
 
             // In between mode
-            if (meleePref >= 0.4f && meleePref <= 0.6f)
+            if (meleePref >= 0.4f && meleePref <= 0.6f && boss.isFightActive)
             {
                 float roll = Random.value;
 

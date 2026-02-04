@@ -38,12 +38,13 @@ public class Boss : Entity
     [SerializeField] private float passiveRangeCooldown = 3f;
 
     [SerializeField] public Boss_AI_Tracker boss_ai_tracker;
+    [SerializeField] private BossFightStartTrigger bossFightStartTrigger;
 
     [SerializeField] private float flipCooldown = 0.5f;
     [SerializeField] public BossMode currentMode = BossMode.Passive;
     [Range(0f, 1f)] public float aiMeleePreference = 0.5f;
     private float lastAttackDecisionTime;
-    [SerializeField] private float attackDecisionCooldown = 0.5f;
+    [SerializeField] private float attackDecisionCooldown = 0.3f;
 
     private float lastMeleeAttackTime = -Mathf.Infinity;
     private float lastRangeAttackTime = -Mathf.Infinity;
@@ -151,6 +152,7 @@ public class Boss : Entity
     {
         isFightActive = false;
         bossEndTime = Time.time;
+        bossFightStartTrigger.SetWallInactive();
         Debug.Log("Boss fight deactivated");
     }
 
@@ -186,17 +188,39 @@ public class Boss : Entity
         else if (value < 0.4f)
             SetMode(BossMode.Passive);
     }
-    /*
-public override void OnDrawGizmos()
-{
-   base.OnDrawGizmos();
 
-   if (meleeAttackPosition == null || meleeAttackStateData == null)
-       return;
+    public override void Update()
+    {
+        base.Update();
 
-   Gizmos.DrawWireSphere(meleeAttackPosition.position, meleeAttackStateData.attackRadius);
-}
-*/
+        if (player == null)
+        {
+            FindPlayer();
+        }
+    }
 
-    // DEBUG
-}
+    private void FindPlayer()
+    {
+        // Method 1: Find by Tag (Recommended for performance)
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+
+        if (playerObj != null)
+        {
+            player = playerObj.transform;
+            Debug.Log("Boss found the Player again via Tag.");
+        }
+    }
+        /*
+    public override void OnDrawGizmos()
+    {
+    base.OnDrawGizmos();
+
+    if (meleeAttackPosition == null || meleeAttackStateData == null)
+      return;
+
+    Gizmos.DrawWireSphere(meleeAttackPosition.position, meleeAttackStateData.attackRadius);
+    }
+    */
+
+        // DEBUG
+    }
