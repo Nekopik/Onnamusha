@@ -16,4 +16,4 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 512
-  attackDamage: 10
+  attackDamage: 5

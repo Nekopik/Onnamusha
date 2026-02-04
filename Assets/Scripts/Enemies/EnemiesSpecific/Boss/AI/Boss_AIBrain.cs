@@ -13,6 +13,7 @@ public class Boss_AIBrain : MonoBehaviour
 
     public int meleeAttacks;
     public int rangeAttacks;
+    public float meleePreference;
 
     [SerializeField] private float decisionInterval = 5f;
     private float decisionTimer;
@@ -61,22 +62,14 @@ public class Boss_AIBrain : MonoBehaviour
         worker.Execute(input);
         Tensor output = worker.PeekOutput();
 
-        float decision = output[0];
+        meleePreference = output[0]; // 0 = range brain, 1 = melee brain
 
-        if (decision > 0.5f)
-        {
-            boss.SetMode(BossMode.Aggressive);
-            Debug.Log("Aggressive mode");
-        }
-            
-        else
-        {
-            boss.SetMode(BossMode.Passive);
-            Debug.Log("Passive mode");
-        }
+        boss.SetAIPreference(meleePreference);
 
         input.Dispose();
         output.Dispose();
+
+        Debug.Log($"AI Preference (Melee): {meleePreference:F2}");
     }
 
     void OnDestroy()

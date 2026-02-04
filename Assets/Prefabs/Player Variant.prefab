@@ -43,13 +43,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 3120748642500903823, guid: c48fb950b6709734594baac8cb7960d4, type: 3}
+      propertyPath: currentHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5752338273852600964, guid: c48fb950b6709734594baac8cb7960d4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.668
+      value: 1.713
       objectReference: {fileID: 0}
     - target: {fileID: 5752338273852600964, guid: c48fb950b6709734594baac8cb7960d4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.17
+      value: -0.302
       objectReference: {fileID: 0}
     - target: {fileID: 5752338273852600964, guid: c48fb950b6709734594baac8cb7960d4, type: 3}
       propertyPath: m_LocalPosition.z

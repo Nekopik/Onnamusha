@@ -41,7 +41,7 @@ public class Oni_FightTracker : MonoBehaviour
 
         if (!File.Exists(logPath))
         {
-            File.WriteAllText(logPath, "mobName,startHP,endHP,fightDuration,playerDistance\n");
+            File.WriteAllText(logPath, "mobName,startHP,endHP,fightDuration,meleeAttacks,rangeAttacks\n");
         }
 
         GameObject p = GameObject.FindWithTag("Player");

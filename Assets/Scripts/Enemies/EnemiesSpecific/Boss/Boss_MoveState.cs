@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Boss_MoveState : MoveState
 {
@@ -30,22 +30,55 @@ public class Boss_MoveState : MoveState
     {
         base.LogicUpdate();
 
-        if (!isPlayerInMaxAggroRange && boss.CanFlip())
+        if (boss.player == null) return;
+
+        float actualBossX = boss.transform.Find("Alive").position.x;
+        int directionToPlayer = boss.player.position.x > actualBossX ? 1 : -1;
+
+        if (directionToPlayer != entity.facingDirection && boss.CanFlip())
         {
-            entity.Flip();
+            entity.Flip(); // Ensure Flip() rotates the ROOT "Boss" object
             boss.SetFlipOnCooldown();
         }
 
-        if (isPlayerInMinAggroRange && boss.CanMeleeAttack())
-        {
-            stateMachine.ChangeState(boss.meleeAttackState);
-            return;
-        }
+        float meleePref = boss.aiMeleePreference;
 
-        if (isPlayerInMaxAggroRange && boss.CanRangeAttack())
+        
+        if (boss.CanMakeAttackDecision())
         {
-            stateMachine.ChangeState(boss.rangeAttackState);
-            return;
+            if (isPlayerInMinAggroRange && meleePref > 0.6f && boss.CanMeleeAttack() && boss.isFightActive)
+            {
+                boss.MarkAttackDecision();
+                stateMachine.ChangeState(boss.meleeAttackState);
+                return;
+            }
+
+            // Passive mode
+            if (meleePref < 0.4f && boss.CanRangeAttack() && boss.isFightActive)
+            {
+                boss.MarkAttackDecision();
+                stateMachine.ChangeState(boss.rangeAttackState);
+                return;
+            }
+
+            // In between mode
+            if (meleePref >= 0.4f && meleePref <= 0.6f && boss.isFightActive)
+            {
+                float roll = Random.value;
+
+                if (roll < meleePref && isPlayerInMinAggroRange && boss.CanMeleeAttack())
+                {
+                    boss.MarkAttackDecision();
+                    stateMachine.ChangeState(boss.meleeAttackState);
+                    return;
+                }
+                else if (boss.CanRangeAttack())
+                {
+                    boss.MarkAttackDecision();
+                    stateMachine.ChangeState(boss.rangeAttackState);
+                    return;
+                }
+            }
         }
 
         if (!boss.isFightActive)
