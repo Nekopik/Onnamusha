@@ -59,6 +59,8 @@ public class Boss_AI_Tracker : MonoBehaviour
         sb.Append(meleeAttacks.ToString("F2", CultureInfo.InvariantCulture)).Append(",");
         sb.Append(rangeAttacks.ToString("F2", CultureInfo.InvariantCulture)).Append(",");
         sb.Append(meleePreference.ToString("F2", CultureInfo.InvariantCulture)).Append("\n");
+
+        File.AppendAllText(logPath, sb.ToString());
     }
 
     private void Update()
