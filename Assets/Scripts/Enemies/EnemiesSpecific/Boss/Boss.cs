@@ -28,6 +28,8 @@ public class Boss : Entity
     [SerializeField] public Transform basePosition;
     [SerializeField] public Transform player;
 
+    [SerializeField] public GameObject endgameMenu;
+
     [SerializeField] public float meleeCooldown = 5f;
     [SerializeField] public float rangeCooldown = 10f;
 
@@ -209,6 +211,11 @@ public class Boss : Entity
             player = playerObj.transform;
             Debug.Log("Boss found the Player again via Tag.");
         }
+    }
+
+    public void OpenEndGameMenu()
+    {
+        endgameMenu.SetActive(true);
     }
         /*
     public override void OnDrawGizmos()

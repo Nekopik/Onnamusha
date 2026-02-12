@@ -32,6 +32,8 @@ public class Oni : Entity
     [SerializeField] private Transform checkDistancePosition;
 
     [SerializeField] public MobMode currentMobMode = MobMode.Passive;
+    [SerializeField] private float passiveMaxHealth = 40f;
+    [SerializeField] private float aggresiveMaxHealth = 30f;
 
     [SerializeField] private float aggressiveMobMeleeCooldown = 0.2f;
     [SerializeField] private float passiveMobMeleeCooldown = 3f;
@@ -53,6 +55,8 @@ public class Oni : Entity
         meleeAttackState = new Oni_MeleeAttackState(this, stateMachine, "MeleeAttack", meleeAttackPosition, meleeAttackStateData, this);
         stunState = new Oni_StunState(this, stateMachine, "Stun", stunStateData, this);
         deadState = new Oni_DeadState(this, stateMachine, "Dead", deadStateData, this);
+
+        ApplyHealthStats();
 
         stateMachine.Initialize(idleState);
     }
@@ -104,9 +108,20 @@ public class Oni : Entity
         if (currentMobMode == mode)
             return;
 
+        float oldMax = (currentMobMode == MobMode.Passive) ? passiveMaxHealth : aggresiveMaxHealth;
+        float currentRatio = currentHealth / oldMax;
+
         currentMobMode = mode;
 
-        Debug.Log("Mob mode switched to: " + mode);
+        float newMax = (currentMobMode == MobMode.Passive) ? passiveMaxHealth : aggresiveMaxHealth;
+        currentHealth = newMax * currentRatio;
+
+        Debug.Log($"Mob mode switched to: {mode}. HP: {currentHealth}/{newMax}");
+    }
+
+    private void ApplyHealthStats()
+    {
+        currentHealth = (currentMobMode == MobMode.Passive) ? passiveMaxHealth : aggresiveMaxHealth;
     }
 
     public override void OnDrawGizmos()

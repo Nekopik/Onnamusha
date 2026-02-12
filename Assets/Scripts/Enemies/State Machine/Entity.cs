@@ -16,7 +16,8 @@ public class Entity : MonoBehaviour
 
     private Vector2 velocityWorkspace;
 
-    private float currentHealth;
+    protected float currentHealth;
+
     private float currentStunResistance;
     private float lastDamageTime;
 
