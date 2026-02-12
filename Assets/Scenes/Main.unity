@@ -440,7 +440,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpBarFill: {fileID: 777610031}
-  expBarFill: {fileID: 1678996943}
+  shurikenCooldownBarFill: {fileID: 1678996943}
+  combatController: {fileID: 5807593266943911280}
   playerStats: {fileID: 1168107591}
 --- !u!1 &287031493
 GameObject:
@@ -92345,6 +92346,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a791d034f10003b479686028308b550d, type: 3}
+--- !u!114 &5807593266943911280 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 29161668970011639, guid: a791d034f10003b479686028308b550d, type: 3}
+  m_PrefabInstance: {fileID: 5807593266943911279}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef773f5e33b7fd844947ea0d94efe778, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

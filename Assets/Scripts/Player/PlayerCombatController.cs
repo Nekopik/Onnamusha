@@ -13,10 +13,14 @@ public class PlayerCombatController : MonoBehaviour
     [SerializeField] private float projectileCooldown = 2f;
     [SerializeField] private float blockDamageMultiplier = 0.2f;
 
+    public float ProjectileCooldown => projectileCooldown;
+    public float LastProjectileTime => lastProjectileTime;
+
     private bool gotInput, isAttacking, isFirstAttack, isBlocking;
 
     private float lastInputTime = Mathf.NegativeInfinity;
     private float lastProjectileTime = Mathf.NegativeInfinity;
+    private float projectileCooldownTimer = 0f;
 
     private AttackDetails attackDetails;
 
@@ -38,6 +42,7 @@ public class PlayerCombatController : MonoBehaviour
 
     private void Update()
     {
+        CheckShurikenCooldown();
         CheckBlockInput();
         CheckCombatInput();
         CheckAttacks();
@@ -94,6 +99,14 @@ public class PlayerCombatController : MonoBehaviour
         anim.SetBool("Block", isBlocking);
     }
 
+    private void CheckShurikenCooldown()
+    {
+        if (projectileCooldownTimer > 0f)
+        {
+            projectileCooldownTimer -= Time.deltaTime;
+        }
+    }
+
     private void CheckAttackHitBox()
     {
         Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attack1HitBoxPos.position, attack1Radius, whatIsDamagable);
@@ -132,9 +145,22 @@ public class PlayerCombatController : MonoBehaviour
 
         int facingDirection = PC.facingDirection;
 
+        projectileCooldownTimer = projectileCooldown;
+        lastProjectileTime = Time.time;
+
         projectile
             .GetComponent<Projectile>()
             .Setup(projectileDetails, facingDirection);
+
+        Debug.Log("Cooldown Timer Set To: " + projectileCooldownTimer);
+    }
+
+    public float GetShurikenCooldown()
+    {
+        if (projectileCooldownTimer <= 0f)
+            return 1f;
+
+        return 1f - (projectileCooldownTimer / projectileCooldown);
     }
 
 

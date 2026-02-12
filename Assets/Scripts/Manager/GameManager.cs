@@ -64,10 +64,8 @@ public class GameManager : MonoBehaviour
     {
         if (respawn && Time.time >= respawnTimeStart + respawnTime)
         {
-            // FORCE Unity to find the object in the scene if the current reference is a prefab
             if (player != null && !player.scene.IsValid())
             {
-                // This happens if 'player' is a prefab asset. We need the one in the world.
                 player = GameObject.FindGameObjectWithTag("Player");
             }
 
@@ -78,7 +76,6 @@ public class GameManager : MonoBehaviour
                 PlayerStats stats = player.GetComponent<PlayerStats>();
                 if (stats != null) stats.ResetStats();
 
-                // Reactivate the hierarchy instance
                 player.SetActive(true);
 
                 if (CVC != null) CVC.Follow = player.transform;
