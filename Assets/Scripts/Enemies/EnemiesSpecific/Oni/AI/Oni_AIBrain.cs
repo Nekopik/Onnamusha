@@ -43,9 +43,6 @@ public class Oni_AIBrain : MonoBehaviour
 
     public void DecideOniMode()
     {
-        //INFO: for now the AI works based on the previous fight only (definitely didn't forget to make data for the whole battle).
-        //will work fine for getting the data, at least for now
-
         //float total = oniTracker.mobMeleeAttacks + oniTracker.mobRangeAttacks + 0.001f;
         inputTensor[0, 0] = oniTracker.durationOfMobFight;
         inputTensor[0, 1] = oniTracker.mobMeleeAttacks; // / total;
@@ -56,7 +53,7 @@ public class Oni_AIBrain : MonoBehaviour
         Tensor output = worker.PeekOutput(); // Don't dispose
         float decision = output[0];
 
-        oni.SetMobMode(decision > 0.5f ? Oni.MobMode.Aggressive : Oni.MobMode.Passive);
+        oni.SetMobMode(decision < 0.5f ? Oni.MobMode.Aggressive : Oni.MobMode.Passive);
     }
     void OnDestroy()
     {
