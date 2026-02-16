@@ -55,8 +55,7 @@ public class PlayerCombatController : MonoBehaviour
             if(combatEnabled)
             {
                 gotInput = true;
-                lastInputTime = Time.time;
-                boss_AIBrain.RegisterMeleeAttack();
+                lastInputTime = Time.time;              
             }
         }
 
@@ -77,6 +76,7 @@ public class PlayerCombatController : MonoBehaviour
         {
             if(!isAttacking)
             {
+                boss_AIBrain.RegisterMeleeAttack();
                 gotInput = false;
                 isAttacking = true;
                 isFirstAttack = !isFirstAttack;

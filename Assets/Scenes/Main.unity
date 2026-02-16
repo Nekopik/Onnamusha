@@ -1458,7 +1458,6 @@ MonoBehaviour:
   meleeAttacks: 0
   rangeAttacks: 0
   meleePreference: 0
-  decisionInterval: 5
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1599,7 +1598,7 @@ Transform:
   m_GameObject: {fileID: 667037396}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.218, y: -0.372, z: 0}
+  m_LocalPosition: {x: 0.822, y: -0.309, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -93025,6 +93024,10 @@ PrefabInstance:
       propertyPath: boss_AIBrain
       value: 
       objectReference: {fileID: 617537848}
+    - target: {fileID: 29161668970011639, guid: a791d034f10003b479686028308b550d, type: 3}
+      propertyPath: attack1Radius
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2239093873207287675, guid: a791d034f10003b479686028308b550d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.668
@@ -93064,6 +93067,14 @@ PrefabInstance:
     - target: {fileID: 2239093873207287675, guid: a791d034f10003b479686028308b550d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2837754316149905698, guid: a791d034f10003b479686028308b550d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.392
+      objectReference: {fileID: 0}
+    - target: {fileID: 2837754316149905698, guid: a791d034f10003b479686028308b550d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.04
       objectReference: {fileID: 0}
     - target: {fileID: 5817115193132591564, guid: a791d034f10003b479686028308b550d, type: 3}
       propertyPath: m_Name

@@ -64,7 +64,7 @@ public class Boss_MoveState : MoveState
             }
 
             // In between mode
-            if (meleePref >= 0.4f && meleePref <= 0.6f && boss.isFightActive)
+            if (meleePref >= 0.25f && meleePref <= 0.75f && boss.isFightActive)
             {
                 float roll = Random.value;
 

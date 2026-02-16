@@ -38,6 +38,7 @@ public class Oni_AIBrain : MonoBehaviour
         {
             decisionTimer = 0f;
             DecideOniMode();
+            Debug.Log("Oni made a mode decision");
         }
     }
 
@@ -48,12 +49,13 @@ public class Oni_AIBrain : MonoBehaviour
         inputTensor[0, 1] = oniTracker.mobMeleeAttacks; // / total;
         inputTensor[0, 2] = oniTracker.mobRangeAttacks; // / total;
         inputTensor[0, 3] = oniTracker.playerEndHP;
+        // + add global parameters
 
         worker.Execute(inputTensor);
         Tensor output = worker.PeekOutput(); // Don't dispose
         float decision = output[0];
 
-        oni.SetMobMode(decision < 0.5f ? Oni.MobMode.Aggressive : Oni.MobMode.Passive);
+        oni.SetMobMode(decision > 0.5f ? Oni.MobMode.Aggressive : Oni.MobMode.Passive);
     }
     void OnDestroy()
     {

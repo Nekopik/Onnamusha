@@ -15,8 +15,8 @@ public class Boss_AIBrain : MonoBehaviour
     public int rangeAttacks;
     public float meleePreference;
 
-    [SerializeField] private float decisionInterval = 5f;
-    private float decisionTimer;
+    //[SerializeField] private float decisionInterval = 5f;
+    //private float decisionTimer;
 
     private bool bossFightStarted = false;
 
