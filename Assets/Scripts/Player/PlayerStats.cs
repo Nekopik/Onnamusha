@@ -4,9 +4,9 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     [SerializeField]
-    public float maxHealth, neededXP;
+    public float maxHealth;
 
-    public float currentHealth, currentXP;
+    public float currentHealth;
 
     private Boss boss;
     private GameManager GM;
@@ -33,17 +33,6 @@ public class PlayerStats : MonoBehaviour
         return currentHealth / maxHealth;
     }
 
-    public void AddXP(float amount)
-    {
-        currentXP += amount;
-
-        if(currentXP >= neededXP)
-        {
-            currentXP -= neededXP;
-            //level++;
-        }
-    }
-
     /*
     private void Die()
     {
@@ -65,11 +54,9 @@ public class PlayerStats : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    // GameManager will call this right before turning the player back on
     public void ResetStats()
     {
         currentHealth = maxHealth;
-        // If you use a Rigidbody2D, reset velocity so you don't spawn moving
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb != null) rb.linearVelocity = Vector2.zero;
     }

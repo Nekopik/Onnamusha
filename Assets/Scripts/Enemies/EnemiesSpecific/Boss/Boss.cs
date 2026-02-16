@@ -28,6 +28,8 @@ public class Boss : Entity
     [SerializeField] public Transform basePosition;
     [SerializeField] public Transform player;
 
+    [SerializeField] public GameObject endgameMenu;
+
     [SerializeField] public float meleeCooldown = 5f;
     [SerializeField] public float rangeCooldown = 10f;
 
@@ -201,7 +203,6 @@ public class Boss : Entity
 
     private void FindPlayer()
     {
-        // Method 1: Find by Tag (Recommended for performance)
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
 
         if (playerObj != null)
@@ -210,9 +211,15 @@ public class Boss : Entity
             Debug.Log("Boss found the Player again via Tag.");
         }
     }
-        /*
+
+    public void OpenEndGameMenu()
+    {
+        endgameMenu.SetActive(true);
+    }
+
     public override void OnDrawGizmos()
     {
+
     base.OnDrawGizmos();
 
     if (meleeAttackPosition == null || meleeAttackStateData == null)
@@ -220,7 +227,9 @@ public class Boss : Entity
 
     Gizmos.DrawWireSphere(meleeAttackPosition.position, meleeAttackStateData.attackRadius);
     }
-    */
 
         // DEBUG
     }
+
+// wspó³czynnik damage, hp, movement speed w zale¿noœci od stopnia zaawansowania gracza 
+// sieæ rekurencyjna

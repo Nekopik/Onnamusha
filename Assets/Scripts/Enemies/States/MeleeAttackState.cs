@@ -18,8 +18,15 @@ public class MeleeAttackState : AttackState
     {
         base.Enter();
         entity.SetVelocity(0f);
-        attackDetails.damageAmount = stateData.attackDamage;
+
+        attackDetails.damageAmount = GetAttackDamage();
+
         attackDetails.position = entity.aliveGameObject.transform.position;
+    }
+
+    public virtual float GetAttackDamage()
+    {
+        return stateData.attackDamage;
     }
 
     public override void Exit()

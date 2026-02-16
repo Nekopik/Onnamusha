@@ -46,7 +46,8 @@ public class Boss_MoveState : MoveState
         
         if (boss.CanMakeAttackDecision())
         {
-            if (isPlayerInMinAggroRange && meleePref > 0.6f && boss.CanMeleeAttack() && boss.isFightActive)
+            //if (isPlayerInMinAggroRange && meleePref > 0.6f && boss.CanMeleeAttack() && boss.isFightActive)
+            if (meleePref < 0.25f && boss.CanRangeAttack() && boss.isFightActive)
             {
                 boss.MarkAttackDecision();
                 stateMachine.ChangeState(boss.meleeAttackState);
@@ -54,7 +55,8 @@ public class Boss_MoveState : MoveState
             }
 
             // Passive mode
-            if (meleePref < 0.4f && boss.CanRangeAttack() && boss.isFightActive)
+            if (isPlayerInMinAggroRange && meleePref > 0.75f && boss.CanMeleeAttack() && boss.isFightActive)
+            //if (meleePref < 0.4f && boss.CanRangeAttack() && boss.isFightActive)
             {
                 boss.MarkAttackDecision();
                 stateMachine.ChangeState(boss.rangeAttackState);
@@ -62,7 +64,7 @@ public class Boss_MoveState : MoveState
             }
 
             // In between mode
-            if (meleePref >= 0.4f && meleePref <= 0.6f && boss.isFightActive)
+            if (meleePref >= 0.25f && meleePref <= 0.75f && boss.isFightActive)
             {
                 float roll = Random.value;
 

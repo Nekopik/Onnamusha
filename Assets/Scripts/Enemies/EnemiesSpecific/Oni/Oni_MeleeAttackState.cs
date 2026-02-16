@@ -29,6 +29,16 @@ public class Oni_MeleeAttackState : MeleeAttackState
         enemy.MobSetMeleeAttackOnCooldown();
     }
 
+    public override float GetAttackDamage()
+    {
+        if (enemy.currentMobMode == Oni.MobMode.Aggressive)
+        {
+            return 10f;
+        }
+
+        return stateData.attackDamage;
+    }
+
     public override void LogicUpdate()
     {
         base.LogicUpdate();

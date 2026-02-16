@@ -13,10 +13,14 @@ public class PlayerCombatController : MonoBehaviour
     [SerializeField] private float projectileCooldown = 2f;
     [SerializeField] private float blockDamageMultiplier = 0.2f;
 
+    public float ProjectileCooldown => projectileCooldown;
+    public float LastProjectileTime => lastProjectileTime;
+
     private bool gotInput, isAttacking, isFirstAttack, isBlocking;
 
     private float lastInputTime = Mathf.NegativeInfinity;
     private float lastProjectileTime = Mathf.NegativeInfinity;
+    private float projectileCooldownTimer = 0f;
 
     private AttackDetails attackDetails;
 
@@ -38,6 +42,7 @@ public class PlayerCombatController : MonoBehaviour
 
     private void Update()
     {
+        CheckShurikenCooldown();
         CheckBlockInput();
         CheckCombatInput();
         CheckAttacks();
@@ -50,8 +55,7 @@ public class PlayerCombatController : MonoBehaviour
             if(combatEnabled)
             {
                 gotInput = true;
-                lastInputTime = Time.time;
-                boss_AIBrain.RegisterMeleeAttack();
+                lastInputTime = Time.time;              
             }
         }
 
@@ -72,6 +76,7 @@ public class PlayerCombatController : MonoBehaviour
         {
             if(!isAttacking)
             {
+                boss_AIBrain.RegisterMeleeAttack();
                 gotInput = false;
                 isAttacking = true;
                 isFirstAttack = !isFirstAttack;
@@ -92,6 +97,14 @@ public class PlayerCombatController : MonoBehaviour
     {
         isBlocking = Input.GetKey(KeyCode.LeftShift) && combatEnabled && !isAttacking;
         anim.SetBool("Block", isBlocking);
+    }
+
+    private void CheckShurikenCooldown()
+    {
+        if (projectileCooldownTimer > 0f)
+        {
+            projectileCooldownTimer -= Time.deltaTime;
+        }
     }
 
     private void CheckAttackHitBox()
@@ -132,9 +145,22 @@ public class PlayerCombatController : MonoBehaviour
 
         int facingDirection = PC.facingDirection;
 
+        projectileCooldownTimer = projectileCooldown;
+        lastProjectileTime = Time.time;
+
         projectile
             .GetComponent<Projectile>()
             .Setup(projectileDetails, facingDirection);
+
+        Debug.Log("Cooldown Timer Set To: " + projectileCooldownTimer);
+    }
+
+    public float GetShurikenCooldown()
+    {
+        if (projectileCooldownTimer <= 0f)
+            return 1f;
+
+        return 1f - (projectileCooldownTimer / projectileCooldown);
     }
 
 
