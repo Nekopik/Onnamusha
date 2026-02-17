@@ -117,6 +117,10 @@ public class Oni_FightTracker : MonoBehaviour
         totalPlayerLossHP += playerLossHP;
         averagePlayerLossHPPerFight = totalPlayerLossHP / fightAmount;
 
+        //change variables for Boss
+        boss_AI.fightDuration = averageFightDuration;
+        boss_AI.playerHpLoss = playerLossHP;
+
         //LogFight(mobName, playerStartHP, playerEndHP, durationOfMobFight, mobMeleeAttacks, mobRangeAttacks);
         NewLogFight(playerLossHP, playerStartHP, playerEndHP, durationOfMobFight, mobMeleeAttacks, mobRangeAttacks, allMobMeleeAttacks, allMobRangeAttacks);
 

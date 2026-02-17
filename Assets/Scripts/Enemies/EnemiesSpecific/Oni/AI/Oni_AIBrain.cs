@@ -38,7 +38,7 @@ public class Oni_AIBrain : MonoBehaviour
         {
             decisionTimer = 0f;
             DecideOniMode();
-            Debug.Log("Oni made a mode decision");
+            //Debug.Log("Oni made a mode decision");
         }
     }
 

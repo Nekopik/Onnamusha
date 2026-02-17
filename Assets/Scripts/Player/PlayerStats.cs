@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    [SerializeField]
-    public float maxHealth;
+    [SerializeField] public float maxHealth;
 
     public float currentHealth;
 
+    [SerializeField] GameObject playerDeadMenu;
     private Boss boss;
     private GameManager GM;
 
@@ -46,12 +46,11 @@ public class PlayerStats : MonoBehaviour
     {
         if (boss != null) boss.SetBossFightInactive();
 
-        if (GM != null)
-        {
-            GM.Respawn(); // This triggers the timer in the GameManager
-        }
+        OpenEndGameMenu();
 
         this.gameObject.SetActive(false);
+
+
     }
 
     public void ResetStats()
@@ -59,5 +58,16 @@ public class PlayerStats : MonoBehaviour
         currentHealth = maxHealth;
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb != null) rb.linearVelocity = Vector2.zero;
+    }
+
+    public void RecoverHP()
+    {
+        currentHealth = maxHealth;
+    }
+
+    public void OpenEndGameMenu()
+    {
+        Time.timeScale = 0f;
+        playerDeadMenu.SetActive(true);
     }
 }

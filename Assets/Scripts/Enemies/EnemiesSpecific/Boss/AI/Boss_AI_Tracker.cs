@@ -15,17 +15,17 @@ public class Boss_AI_Tracker : MonoBehaviour
     private float logDuration;
     private float logMeleeAttacks;
     private float logRangeAttacks;
-    private float logMeleePreference;
+    private float logModifier;
 
     private string logPath;
 
     private void Start()
     {
-        logPath = Path.Combine(Application.persistentDataPath, "boss_fight_log.csv");
+        logPath = Path.Combine(Application.persistentDataPath, "new_boss_fight_log.csv");
 
         if (!File.Exists(logPath))
         {
-            File.WriteAllText(logPath, "startHP,endHP,fightDuration,meleeAttacks,rangeAttacks,meleePreference\n");
+            File.WriteAllText(logPath, "startHP,endHP,fightDuration,meleeAttacks,rangeAttacks,skillModifier\n");
         }
     }
 
@@ -43,14 +43,14 @@ public class Boss_AI_Tracker : MonoBehaviour
         }
         logMeleeAttacks = boss_AI.meleeAttacks;
         logRangeAttacks = boss_AI.rangeAttacks;
-        logMeleePreference = boss_AI.meleePreference;
+        logModifier = boss_AI.skillModifier;
 
-        LogBossFightBuilder(logStartHP, logEndHP, logDuration, logMeleeAttacks, logRangeAttacks, logMeleePreference);
+        LogBossFightBuilder(logStartHP, logEndHP, logDuration, logMeleeAttacks, logRangeAttacks, logModifier);
 
         Debug.Log("Boss fight logged");
     }
 
-    void LogBossFightBuilder(float startHP, float endHP, float duration, float meleeAttacks, float rangeAttacks, float meleePreference)
+    void LogBossFightBuilder(float startHP, float endHP, float duration, float meleeAttacks, float rangeAttacks, float modifier)
     {
         StringBuilder sb = new StringBuilder();
         sb.Append(startHP.ToString("F2", CultureInfo.InvariantCulture)).Append(",");
@@ -58,7 +58,7 @@ public class Boss_AI_Tracker : MonoBehaviour
         sb.Append(duration.ToString("F2", CultureInfo.InvariantCulture)).Append(",");
         sb.Append(meleeAttacks.ToString("F2", CultureInfo.InvariantCulture)).Append(",");
         sb.Append(rangeAttacks.ToString("F2", CultureInfo.InvariantCulture)).Append(",");
-        sb.Append(meleePreference.ToString("F2", CultureInfo.InvariantCulture)).Append("\n");
+        sb.Append(modifier.ToString("F2", CultureInfo.InvariantCulture)).Append("\n");
 
         File.AppendAllText(logPath, sb.ToString());
     }

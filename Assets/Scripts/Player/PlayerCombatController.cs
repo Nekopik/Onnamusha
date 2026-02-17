@@ -50,7 +50,7 @@ public class PlayerCombatController : MonoBehaviour
 
     private void CheckCombatInput()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.J))
         {
             if(combatEnabled)
             {
@@ -59,7 +59,7 @@ public class PlayerCombatController : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.K))
         {
             if (combatEnabled && !isAttacking && Time.time >= lastProjectileTime + projectileCooldown)
             {

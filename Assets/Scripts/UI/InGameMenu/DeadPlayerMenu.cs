@@ -2,14 +2,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class EndgameMenu : MonoBehaviour
+public class DeadPlayerMenu : MonoBehaviour
 {
-    public GameObject endgameUI;
-
     [SerializeField] Boss boss;
     [SerializeField] TMP_Text modifierText;
     [SerializeField] TMP_Text skillText;
 
+    public GameObject deadPlayerMenu;
     public void Restart()
     {
         Time.timeScale = 1f;
@@ -57,5 +56,4 @@ public class EndgameMenu : MonoBehaviour
             skillText.text = "what";
         }
     }
-
 }
