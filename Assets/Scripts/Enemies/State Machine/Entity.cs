@@ -31,6 +31,8 @@ public class Entity : MonoBehaviour
 
     public virtual void Start()
     {
+        entityData = Instantiate(entityData);
+
         facingDirection = 1;
         currentHealth = entityData.maxHealth;
         currentStunResistance = entityData.stunResistance;
@@ -38,7 +40,7 @@ public class Entity : MonoBehaviour
         aliveGameObject = transform.Find("Alive").gameObject;
         rb = aliveGameObject.GetComponent<Rigidbody2D>();
         animator = aliveGameObject.GetComponent<Animator>();
-        animationToStateMachine = aliveGameObject.GetComponent <AnimationToStateMachine>();
+        animationToStateMachine = aliveGameObject.GetComponent<AnimationToStateMachine>();
 
         stateMachine = new FiniteStateMachine();
     }
@@ -64,7 +66,9 @@ public class Entity : MonoBehaviour
 
     public virtual void SetVelocity(float velocity)
     {
-        velocityWorkspace.Set(facingDirection * velocity, rb.linearVelocity.y);
+        float finalSpeed = velocity * entityData.moveSpeedMultiplier;
+
+        velocityWorkspace.Set(facingDirection * finalSpeed, rb.linearVelocity.y);
         rb.linearVelocity = velocityWorkspace;
     }
 
@@ -170,6 +174,20 @@ public class Entity : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         Time.timeScale = 0f;
+    }
+
+    public virtual void ApplyAIModifier(float modifier)
+    {
+        float hpPercent = currentHealth / entityData.maxHealth;
+
+        entityData.damageMultiplier = modifier;
+        entityData.moveSpeedMultiplier = modifier;
+
+        entityData.maxHealth *= modifier;
+
+        currentHealth = entityData.maxHealth * hpPercent;
+
+        Debug.Log($"AI Modifier Applied: {modifier:F2} | New Max HP: {entityData.maxHealth}");
     }
 
     public virtual void OnDrawGizmos()

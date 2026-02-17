@@ -24,7 +24,7 @@ public class RangeAttackState : AttackState
 
         entity.SetVelocity(0f);
 
-        attackDetails.damageAmount = stateData.attackDamage;
+        attackDetails.damageAmount = stateData.attackDamage * entity.entityData.damageMultiplier;
         attackDetails.position = entity.aliveGameObject.transform.position;
 
         //attackDirection = entity.aliveGameObject.transform.right;
@@ -74,9 +74,11 @@ public class RangeAttackState : AttackState
             return;
         }
 
+        float modifiedSpeed = stateData.projectileSpeed * entity.entityData.moveSpeedMultiplier;
+
         projectileScript.Fire(
             lockedAttackDirection,
-            stateData.projectileSpeed,
+            modifiedSpeed,
             attackDetails
         );
     }

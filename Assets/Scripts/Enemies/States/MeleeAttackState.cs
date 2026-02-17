@@ -26,7 +26,7 @@ public class MeleeAttackState : AttackState
 
     public virtual float GetAttackDamage()
     {
-        return stateData.attackDamage;
+        return stateData.attackDamage * entity.entityData.damageMultiplier;
     }
 
     public override void Exit()

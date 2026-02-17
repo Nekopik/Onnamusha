@@ -96,9 +96,12 @@ public class Boss : Entity
 
     public bool CanMeleeAttack()
     {
-        float cooldown = currentMode == BossMode.Aggressive
+        float cooldown = meleeCooldown;
+            /*
+            currentMode == BossMode.Aggressive
             ? aggressiveMeleeCooldown
             : passiveMeleeCooldown;
+            */
 
         return Time.time >= lastMeleeAttackTime + cooldown;
     }
@@ -130,17 +133,6 @@ public class Boss : Entity
     public void SetFlipOnCooldown()
     {
         lastFlipTime = Time.time;
-    }
-
-    //TODO: add charge attack state and special attack state
-    public bool ShouldChargePlayer(float distanceToPlayer, float chargeDistance)
-    {
-        return currentMode == BossMode.Aggressive && distanceToPlayer > chargeDistance;
-    }
-
-    public bool CanUseSpecialAttack()
-    {
-        return currentMode == BossMode.Passive;
     }
 
     public void SetBossFightActive()

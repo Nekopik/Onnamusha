@@ -1,6 +1,8 @@
+using Google.Protobuf.WellKnownTypes;
+using System.Globalization;
 using System.IO;
 using System.Text;
-using System.Globalization;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Oni_FightTracker : MonoBehaviour
@@ -23,6 +25,9 @@ public class Oni_FightTracker : MonoBehaviour
     public float averageFightDuration;
     public float durationOfMobFight;
     public float playerEndHP;
+    public float playerLossHP;
+    public float averagePlayerLossHPPerFight;
+    public float totalPlayerLossHP;
 
     private float fightStartTime;
     private float playerStartHP;
@@ -30,15 +35,19 @@ public class Oni_FightTracker : MonoBehaviour
 
     public int mobMeleeAttacks;
     public int mobRangeAttacks;
+    public int allMobMeleeAttacks;
+    public int allMobRangeAttacks;
 
     private int startMobMeleeAttacks;
     private int startMobRangeAttacks;
 
     private string logPath;
+    private string newLogPath;
 
     void Start()
     {
         logPath = Path.Combine(Application.persistentDataPath, "mob_fight_log.csv");
+        newLogPath = Path.Combine(Application.persistentDataPath, "new_mob_fight_log.csv");
 
         if (!File.Exists(logPath))
         {
@@ -100,9 +109,20 @@ public class Oni_FightTracker : MonoBehaviour
         mobMeleeAttacks = (boss_AI.meleeAttacks - startMobMeleeAttacks);
         mobRangeAttacks = (boss_AI.rangeAttacks - startMobRangeAttacks);
 
-        playerEndHP = playerStats.GetHPPercent();
+        allMobMeleeAttacks = boss_AI.meleeAttacks;
+        allMobRangeAttacks = boss_AI .rangeAttacks;        
 
-        LogFight(mobName, playerStartHP, playerEndHP, durationOfMobFight, mobMeleeAttacks, mobRangeAttacks);
+        playerEndHP = playerStats.GetHPPercent();
+        playerLossHP = playerStartHP - playerEndHP;
+        totalPlayerLossHP += playerLossHP;
+        averagePlayerLossHPPerFight = totalPlayerLossHP / fightAmount;
+
+        //change variables for Boss
+        boss_AI.fightDuration = averageFightDuration;
+        boss_AI.playerHpLoss = playerLossHP;
+
+        //LogFight(mobName, playerStartHP, playerEndHP, durationOfMobFight, mobMeleeAttacks, mobRangeAttacks);
+        NewLogFight(playerLossHP, playerStartHP, playerEndHP, durationOfMobFight, mobMeleeAttacks, mobRangeAttacks, allMobMeleeAttacks, allMobRangeAttacks);
 
         mobFightActive = false;
 
@@ -122,6 +142,21 @@ public class Oni_FightTracker : MonoBehaviour
         File.AppendAllText(logPath, sb.ToString());
 
         Debug.Log($"Fight logged: {mob}, duration {duration:F2}s, fight amount {fightAmount}, melee hits {mobMeleeAttacks}, range hits {mobRangeAttacks}");
+    }
+
+    void NewLogFight(float lossHP, float startHP, float endHP, float duration, int meleeAttacks, int rangeAttacks, int totalMeleeAttacks, int totalRangeAttacks)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.Append(lossHP.ToString("F2", CultureInfo.InvariantCulture)).Append(",");
+        sb.Append(startHP.ToString("F2", CultureInfo.InvariantCulture)).Append(",");
+        sb.Append(endHP.ToString("F2", CultureInfo.InvariantCulture)).Append(",");
+        sb.Append(duration.ToString("F2", CultureInfo.InvariantCulture)).Append(",");
+        sb.Append(meleeAttacks.ToString("F2", CultureInfo.InvariantCulture)).Append(",");
+        sb.Append(rangeAttacks.ToString("F2", CultureInfo.InvariantCulture)).Append("\n");
+
+        File.AppendAllText(newLogPath, sb.ToString());
+
+        Debug.Log($"Fight logged: {lossHP}, duration {duration:F2}s, fight amount {fightAmount}, melee hits {mobMeleeAttacks}, range hits {mobRangeAttacks}");
     }
 
     public void ForceEndFight()

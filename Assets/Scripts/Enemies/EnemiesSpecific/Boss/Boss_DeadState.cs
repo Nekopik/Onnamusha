@@ -23,7 +23,7 @@ public class Boss_DeadState : DeadState
         entity.SetVelocity(0f);
         boss.boss_ai_tracker.LogBossFight();
         entity.animator.SetBool("Dead", true);
-        boss.StartCoroutine(PauseAfterDelay()); // not sure if I should pause the game or allow player to still play
+        boss.StartCoroutine(PauseAfterDelay());
     }
 
     public override void Exit()

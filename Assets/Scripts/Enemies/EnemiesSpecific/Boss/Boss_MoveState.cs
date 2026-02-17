@@ -4,7 +4,7 @@ public class Boss_MoveState : MoveState
 {
     private Boss boss;
 
-    private float stoppingDistance = 0.2f;
+    private float stoppingDistance = 0.3f;
     public Boss_MoveState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, D_MoveState stateData, Boss boss) : base(entity, stateMachine, animBoolName, stateData)
     {
         this.boss = boss;
@@ -37,49 +37,25 @@ public class Boss_MoveState : MoveState
 
         if (directionToPlayer != entity.facingDirection && boss.CanFlip())
         {
-            entity.Flip(); // Ensure Flip() rotates the ROOT "Boss" object
+            entity.Flip();
             boss.SetFlipOnCooldown();
         }
 
-        float meleePref = boss.aiMeleePreference;
-
         
-        if (boss.CanMakeAttackDecision())
+        if (boss.CanMakeAttackDecision() && boss.isFightActive)
         {
-            //if (isPlayerInMinAggroRange && meleePref > 0.6f && boss.CanMeleeAttack() && boss.isFightActive)
-            if (meleePref < 0.25f && boss.CanRangeAttack() && boss.isFightActive)
+
+            if (isPlayerInMinAggroRange && boss.CanMeleeAttack())
             {
                 boss.MarkAttackDecision();
                 stateMachine.ChangeState(boss.meleeAttackState);
                 return;
             }
-
-            // Passive mode
-            if (isPlayerInMinAggroRange && meleePref > 0.75f && boss.CanMeleeAttack() && boss.isFightActive)
-            //if (meleePref < 0.4f && boss.CanRangeAttack() && boss.isFightActive)
+            else if (boss.CanRangeAttack())
             {
                 boss.MarkAttackDecision();
                 stateMachine.ChangeState(boss.rangeAttackState);
                 return;
-            }
-
-            // In between mode
-            if (meleePref >= 0.25f && meleePref <= 0.75f && boss.isFightActive)
-            {
-                float roll = Random.value;
-
-                if (roll < meleePref && isPlayerInMinAggroRange && boss.CanMeleeAttack())
-                {
-                    boss.MarkAttackDecision();
-                    stateMachine.ChangeState(boss.meleeAttackState);
-                    return;
-                }
-                else if (boss.CanRangeAttack())
-                {
-                    boss.MarkAttackDecision();
-                    stateMachine.ChangeState(boss.rangeAttackState);
-                    return;
-                }
             }
         }
 

@@ -1,11 +1,9 @@
 using Unity.Barracuda;
 using UnityEngine;
-using static Boss;
 
 public class Boss_AIBrain : MonoBehaviour
 {
     [SerializeField] private NNModel bossModeModel;
-
     private Model runtimeModel;
     private IWorker worker;
 
@@ -13,10 +11,11 @@ public class Boss_AIBrain : MonoBehaviour
 
     public int meleeAttacks;
     public int rangeAttacks;
-    public float meleePreference;
 
-    //[SerializeField] private float decisionInterval = 5f;
-    //private float decisionTimer;
+    public float fightDuration;
+    public float playerHpLoss;
+
+    public float skillModifier = 1f;
 
     private bool bossFightStarted = false;
 
@@ -26,71 +25,63 @@ public class Boss_AIBrain : MonoBehaviour
         worker = WorkerFactory.CreateWorker(WorkerFactory.Type.Auto, runtimeModel);
     }
 
-    void Update()
-    {
-        /*
-        if (!bossFightStarted)
-            return;
-
-        decisionTimer += Time.deltaTime;
-
-        if (decisionTimer >= decisionInterval)
-        {
-            decisionTimer = 0f;
-            DecideMode();
-        }
-        */
-    }
-
     public void StartBossFight()
     {
         bossFightStarted = true;
-        DecideMode();
+        DecideSkillModifier();
     }
 
-    void DecideMode()
+    public void DecideSkillModifier()
     {
         float total = meleeAttacks + rangeAttacks + 0.001f;
 
-        float normalizedMelee = meleeAttacks / total;
-        float normalizedRange = rangeAttacks / total;
+        float meleeRatio = meleeAttacks / total;
+        float rangeRatio = rangeAttacks / total;
 
-        Tensor input = new Tensor(1, 2);
-        input[0] = normalizedMelee;
-        input[1] = normalizedRange;
+        float normalizedDuration = fightDuration / 10f;
+
+        Tensor input = new Tensor(1, 4);
+
+        input[0] = meleeRatio;
+        input[1] = rangeRatio;
+        input[2] = normalizedDuration;
+        input[3] = playerHpLoss;
 
         worker.Execute(input);
+
         Tensor output = worker.PeekOutput();
 
-        meleePreference = output[0]; // 0 = range brain, 1 = melee brain
+        skillModifier = output[0];
 
-        boss.SetAIPreference(meleePreference);
+        ApplyModifier(skillModifier);
+
+        Debug.Log("Boss Skill Modifier: " + skillModifier.ToString("F2"));
 
         input.Dispose();
         output.Dispose();
+    }
 
-        Debug.Log($"AI Preference (Melee): {meleePreference:F2}");
+    private void ApplyModifier(float modifier)
+    {
+        modifier = Mathf.Clamp(modifier, 0.8f, 2f);
+
+        boss.ApplyAIModifier(skillModifier);
+    }
+
+    public void RegisterMeleeAttack()
+    {
+        meleeAttacks++;
+        Debug.Log("Melee attack done");
+    }
+
+    public void RegisterRangeAttack()
+    {
+        rangeAttacks++;
+        Debug.Log("Range attack done");
     }
 
     void OnDestroy()
     {
         worker?.Dispose();
     }
-
-    // Attack tracking
-    public void RegisterMeleeAttack()
-    {
-        Debug.Log("Melee Attack done");
-        meleeAttacks++;
-    }
-
-    public void RegisterRangeAttack()
-    {
-        Debug.Log("Range Attack done");
-        rangeAttacks++;
-    }
-
-    //Data saving for AI learning
-
 }
-

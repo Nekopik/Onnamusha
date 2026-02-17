@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6edcb3978afd2b4bbd1e57ee970df3f, type: 3}
   m_Name: D_BossBaseData
   m_EditorClassIdentifier: 
-  maxHealth: 150
+  maxHealth: 100
   damageHopSpeed: 1
   wallCheckDistance: 0.2
   ledgeCheckDistance: 0.4
@@ -22,6 +22,8 @@ MonoBehaviour:
   stunRecoveryTime: 2
   closeRangeActionDistance: 1
   groundCheckRadius: 0.3
+  damageMultiplier: 1
+  moveSpeedMultiplier: 1
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 512

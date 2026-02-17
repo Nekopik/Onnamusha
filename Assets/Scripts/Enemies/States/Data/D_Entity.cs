@@ -20,6 +20,9 @@ public class D_Entity : ScriptableObject
 
     public float groundCheckRadius = 0.3f;
 
+    public float damageMultiplier = 1f;
+    public float moveSpeedMultiplier = 1f;
+
     public LayerMask whatIsPlayer;
     public LayerMask whatIsGround;
 }

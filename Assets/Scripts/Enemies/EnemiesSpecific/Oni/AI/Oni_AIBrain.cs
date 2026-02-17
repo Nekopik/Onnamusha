@@ -21,7 +21,7 @@ public class Oni_AIBrain : MonoBehaviour
         runtimeModel = ModelLoader.Load(oniModeModel);
         worker = WorkerFactory.CreateWorker(WorkerFactory.Type.Auto, runtimeModel);
 
-        inputTensor = new Tensor(1, 4); // Reuse
+        inputTensor = new Tensor(1, 8); // Reuse
     }
 
     private void Awake()
@@ -38,18 +38,27 @@ public class Oni_AIBrain : MonoBehaviour
         {
             decisionTimer = 0f;
             DecideOniMode();
-            Debug.Log("Oni made a mode decision");
+            //Debug.Log("Oni made a mode decision");
         }
     }
 
     public void DecideOniMode()
     {
         //float total = oniTracker.mobMeleeAttacks + oniTracker.mobRangeAttacks + 0.001f;
-        inputTensor[0, 0] = oniTracker.durationOfMobFight;
-        inputTensor[0, 1] = oniTracker.mobMeleeAttacks; // / total;
-        inputTensor[0, 2] = oniTracker.mobRangeAttacks; // / total;
-        inputTensor[0, 3] = oniTracker.playerEndHP;
-        // + add global parameters
+        inputTensor[0, 0] = oniTracker.durationOfMobFight / 10f;
+
+        inputTensor[0, 1] = oniTracker.mobMeleeAttacks;
+        inputTensor[0, 2] = oniTracker.mobRangeAttacks;
+
+        inputTensor[0, 3] = oniTracker.playerLossHP;
+
+        inputTensor[0, 4] = oniTracker.allMobMeleeAttacks / 100f;
+        inputTensor[0, 5] = oniTracker.allMobRangeAttacks / 100f;
+
+        inputTensor[0, 6] = oniTracker.averageFightDuration / 10f;
+
+        inputTensor[0, 7] = oniTracker.averagePlayerLossHPPerFight;
+
 
         worker.Execute(inputTensor);
         Tensor output = worker.PeekOutput(); // Don't dispose
