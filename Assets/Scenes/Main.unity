@@ -1861,12 +1861,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4945c1ed6b90a5c44bc3b6540067ec48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossModeModel: {fileID: 5022602860645237092, guid: 611587dacedd5aa4c997f1f98237004f, type: 3}
+  bossModeModel: {fileID: 5022602860645237092, guid: 77924d9da6f3f0347a8e1ca212ba7737, type: 3}
   boss: {fileID: 617537845}
   meleeAttacks: 0
   rangeAttacks: 0
   fightDuration: 0
   playerHpLoss: 0
+  arrivedAtBoss: 0
   skillModifier: 1
 --- !u!1 &619394800
 GameObject:
@@ -95261,7 +95262,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f83c284929fc9940b659b4437fcb9ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oni: {fileID: 4109364212575895693, guid: 710265a794ca73d4e9a9ccdceda5179f, type: 3}
   mobModeText: {fileID: 218807788}
 --- !u!1 &1982057405
 GameObject:

@@ -26,12 +26,6 @@ public class MobModeUI : MonoBehaviour
         if (oni == null)
         {
             oni = Object.FindFirstObjectByType<Oni>();
-
-            if (oni == null) return;
-
-            lastMode = oni.currentMobMode;
-            UpdateModeText(lastMode);
-            initialized = true;
         }
 
         if (!initialized || mobModeText == null)

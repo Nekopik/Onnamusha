@@ -12,11 +12,19 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private Boss_AIBrain boss_AIBrain;
     private GameManager GM;
 
+    private Oni_FightTracker mobFightTracker;
+
     private void Start()
     {
         currentHealth = maxHealth;
         GM = GameObject.Find("GameManager").GetComponent<GameManager>();
         boss = GameObject.Find("Boss").GetComponent<Boss>();
+    }
+
+    private void Awake()
+    {
+        if (mobFightTracker == null)
+            mobFightTracker = FindFirstObjectByType<Oni_FightTracker>();
     }
 
     public void DecreaseHealth(float amount)
@@ -47,6 +55,8 @@ public class PlayerStats : MonoBehaviour
     {
         if (boss != null) boss.SetBossFightInactive();
 
+        mobFightTracker.EndFight();
+        boss_AIBrain.playerHpLoss = 1f;
         boss_AIBrain.DecideSkillModifier();
 
         OpenEndGameMenu();
