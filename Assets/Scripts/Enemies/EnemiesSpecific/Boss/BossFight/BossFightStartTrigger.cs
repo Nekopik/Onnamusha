@@ -7,6 +7,8 @@ public class BossFightStartTrigger : MonoBehaviour
     [SerializeField] private Boss boss;
     [SerializeField] private PlayerStats playerStats;
 
+    private Oni oni;
+
     public float PlayerBossFightStartHP;
 
     private void OnTriggerEnter2D(Collider2D other)

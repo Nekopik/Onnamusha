@@ -9,6 +9,7 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField] GameObject playerDeadMenu;
     private Boss boss;
+    [SerializeField] private Boss_AIBrain boss_AIBrain;
     private GameManager GM;
 
     private void Start()
@@ -45,6 +46,8 @@ public class PlayerStats : MonoBehaviour
     private void Die()
     {
         if (boss != null) boss.SetBossFightInactive();
+
+        boss_AIBrain.DecideSkillModifier();
 
         OpenEndGameMenu();
 

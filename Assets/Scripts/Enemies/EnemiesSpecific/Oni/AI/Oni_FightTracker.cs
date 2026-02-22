@@ -16,7 +16,7 @@ public class Oni_FightTracker : MonoBehaviour
     
 
     public string mobName = "Oni";
-    public float maxFightDuration = 10f;
+    public float maxFightDuration = 30f;
     public bool mobFightActive = false;
 
     public float fightAmount;
