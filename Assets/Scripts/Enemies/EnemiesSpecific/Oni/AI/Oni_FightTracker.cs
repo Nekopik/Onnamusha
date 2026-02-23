@@ -16,7 +16,7 @@ public class Oni_FightTracker : MonoBehaviour
     
 
     public string mobName = "Oni";
-    public float maxFightDuration = 10f;
+    public float maxFightDuration = 30f;
     public bool mobFightActive = false;
 
     public float fightAmount;
@@ -77,9 +77,13 @@ public class Oni_FightTracker : MonoBehaviour
                 player = p.transform;
             Debug.Log("Player cannot be found");
         }
-        //Debug.Log(player.position.x);
-        //Debug.Log(oni.CurrentPosX);
-    }
+
+        if (oni == null)
+            oni = Object.FindFirstObjectByType<Oni>();
+
+            //Debug.Log(player.position.x);
+            //Debug.Log(oni.CurrentPosX);
+        }
 
     public void StartFight()
     {
@@ -119,7 +123,7 @@ public class Oni_FightTracker : MonoBehaviour
 
         //change variables for Boss
         boss_AI.fightDuration = averageFightDuration;
-        boss_AI.playerHpLoss = playerLossHP;
+        boss_AI.playerHpLoss = totalPlayerLossHP;
 
         //LogFight(mobName, playerStartHP, playerEndHP, durationOfMobFight, mobMeleeAttacks, mobRangeAttacks);
         NewLogFight(playerLossHP, playerStartHP, playerEndHP, durationOfMobFight, mobMeleeAttacks, mobRangeAttacks, allMobMeleeAttacks, allMobRangeAttacks);
