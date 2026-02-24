@@ -52,6 +52,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6241515563889643579, guid: ea72d35c1c8084f48bc761277bcf9d50, type: 3}
     - target: {fileID: 971373592304349586, guid: a27ed343c713ecc47ab9ed3194c1c755, type: 3}
+      propertyPath: hurtStateData
+      value: 
+      objectReference: {fileID: 11400000, guid: 0372d8618fb4e454fbbab4b44ccfae41, type: 2}
+    - target: {fileID: 971373592304349586, guid: a27ed343c713ecc47ab9ed3194c1c755, type: 3}
       propertyPath: checkDistancePosition
       value: 
       objectReference: {fileID: 5604226192678567380}
