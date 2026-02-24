@@ -15,6 +15,7 @@ public class Oni : Entity
     public Oni_LookForPlayerState lookForPlayerState { get; private set; }
     public Oni_MeleeAttackState meleeAttackState { get; private set; }
     public Oni_StunState stunState { get; private set; }
+    public Oni_HurtState hurtState { get; private set; }
     public Oni_DeadState deadState { get; private set; }
 
     [SerializeField] private D_IdleState idleStateData;
@@ -24,6 +25,7 @@ public class Oni : Entity
     [SerializeField] private D_LookForPlayerState lookForPlayerStateData;
     [SerializeField] private D_MeleeAttackState meleeAttackStateData;
     [SerializeField] private D_StunState stunStateData;
+    [SerializeField] private D_HurtState hurtStateData;
     [SerializeField] private D_DeadState deadStateData;
 
     [SerializeField] private Oni_FightTracker mobFightTracker;
@@ -54,6 +56,7 @@ public class Oni : Entity
         lookForPlayerState = new Oni_LookForPlayerState(this, stateMachine, "LookForPlayer", lookForPlayerStateData, this);
         meleeAttackState = new Oni_MeleeAttackState(this, stateMachine, "MeleeAttack", meleeAttackPosition, meleeAttackStateData, this);
         stunState = new Oni_StunState(this, stateMachine, "Stun", stunStateData, this);
+        hurtState = new Oni_HurtState(this, stateMachine, "Hurt", hurtStateData, this);
         deadState = new Oni_DeadState(this, stateMachine, "Dead", deadStateData, this);
 
         ApplyHealthStats();
@@ -86,7 +89,11 @@ public class Oni : Entity
         else if (isStuned && stateMachine.currentState != stunState)
         {
             stateMachine.ChangeState(stunState);
-        } 
+        }
+        else
+        {
+            stateMachine.ChangeState(hurtState);
+        }
     }
 
     public void MobSetMeleeAttackOnCooldown()
