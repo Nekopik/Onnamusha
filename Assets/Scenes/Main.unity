@@ -1861,7 +1861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4945c1ed6b90a5c44bc3b6540067ec48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossModeModel: {fileID: 5022602860645237092, guid: 77924d9da6f3f0347a8e1ca212ba7737, type: 3}
+  bossModeModel: {fileID: 5022602860645237092, guid: 0b9b4f3ee524b71408cd98a02d666065, type: 3}
   boss: {fileID: 617537845}
   meleeAttacks: 0
   rangeAttacks: 0
