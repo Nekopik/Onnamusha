@@ -178,6 +178,14 @@ MonoBehaviour:
   deadStateData: {fileID: 11400000, guid: 94721dbb964e37346bd9565cdafa4cdb, type: 2}
   mobFightTracker: {fileID: 0}
   meleeAttackPosition: {fileID: 6274109213473995705}
+  checkDistancePosition: {fileID: 0}
+  currentMobMode: 1
+  passiveMaxHealth: 40
+  aggresiveMaxHealth: 30
+  aggressiveMobMeleeCooldown: 0.2
+  passiveMobMeleeCooldown: 3
+  mobMeleeCooldown: 2
+  isFightActive: 0
 --- !u!1 &1690252359837328117
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,7 +334,7 @@ SpriteRenderer:
   m_SortingLayerID: -496092811
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6126476111584214907, guid: b3a7d7c461fd7b74db6441faef7e4ad1, type: 3}
+  m_Sprite: {fileID: 6241515563889643579, guid: ea72d35c1c8084f48bc761277bcf9d50, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -401,8 +409,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: -0.09}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.81, y: 0.77}
+    pivot: {x: 0.54545456, y: -0.06349207}
+    oldSize: {x: 0.55, y: 0.63}
     newSize: {x: 0.8, y: 0.77}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
