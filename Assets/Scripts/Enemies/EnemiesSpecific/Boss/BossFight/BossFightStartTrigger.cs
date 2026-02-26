@@ -20,6 +20,8 @@ public class BossFightStartTrigger : MonoBehaviour
             boss.SetBossFightActive();
             PlayerBossFightStartHP = playerStats.GetHPPercent();
             wall.SetActive(true);
+
+            this.gameObject.SetActive(false);
         }
     }
 

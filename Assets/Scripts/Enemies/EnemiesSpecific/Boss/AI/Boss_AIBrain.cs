@@ -25,6 +25,7 @@ public class Boss_AIBrain : MonoBehaviour
     public float skillModifier = 1f;
 
     private bool bossFightStarted = false;
+    public bool bossModifierDecided = false;
 
     private string logPath;
 
@@ -87,6 +88,7 @@ public class Boss_AIBrain : MonoBehaviour
         modifier = Mathf.Clamp(modifier, 0.8f, 2f);
 
         boss.ApplyAIModifier(skillModifier);
+        bossModifierDecided = true;
     }
 
     public void RegisterMeleeAttack()
