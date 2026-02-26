@@ -56,8 +56,11 @@ public class PlayerStats : MonoBehaviour
         if (boss != null) boss.SetBossFightInactive();
 
         mobFightTracker.EndFight();
-        boss_AIBrain.playerHpLoss = 1f;
-        boss_AIBrain.DecideSkillModifier();
+        if (!boss_AIBrain.bossModifierDecided)
+        {
+            boss_AIBrain.playerHpLoss = 1f;
+            boss_AIBrain.DecideSkillModifier();
+        }
 
         OpenEndGameMenu();
 
